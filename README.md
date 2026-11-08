@@ -64,17 +64,19 @@ Clone these beside `lucianos` (in the same folder as your other repos, such as `
 cd ..                                                   # the folder that holds lucianos
 git clone https://github.com/luciangreen/mnns            # Optimise with mnns (Lucian Office, fastos)
 git clone https://github.com/luciangreen/vetusiapl2webpl # turns funnels into web servers (Tabler)
+git clone https://github.com/luciangreen/Starlog         # the syntax Visual Starlog presentations are written in
 ```
 
 | Used by | Repos (beside lucianos) | What for |
 | --- | --- | --- |
 | Lucian Office, fastos | `mnns` | Optimise with mnns |
 | Tabler funnels | `vetusiapl2webpl` | Converting funnels to web servers |
+| Visual Starlog | `Starlog` | Running presentations written in Starlog (set its folder in Visual Starlog's Settings) |
 | Writer (GL Inspire) | `Algorithm-Writer-with-Lists`, `Text-to-Breasonings`, `listprologinterpreter`, `Philosophy`, `Languages`, `List-Prolog-to-Prolog-Converter`, `Prolog-to-List-Prolog`, `SSI`, `culturaltranslationtool` | Grammar Logic. Install these with [Time Machine](https://github.com/luciangreen/Time_Machine), as the LucianOS README says. GL Inspire still works without them, from your bio and recent texts. |
 
 ### Or all at once
 
-After cloning `lucianoffice` into `apps/`, this clones (or updates) every app above and `mnns` and `vetusiapl2webpl`. Run it from the `lucianos` folder:
+After cloning `lucianoffice` into `apps/`, this clones (or updates) every app above and `mnns`, `vetusiapl2webpl` and `Starlog`. Run it from the `lucianos` folder:
 
 ```sh
 sh apps/lucianoffice/scripts/install.sh

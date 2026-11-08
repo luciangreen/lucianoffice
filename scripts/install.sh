@@ -2,7 +2,7 @@
 # Installs (or updates) the Lucian Office apps and the repos they use.
 # Run it from your lucianos folder, after cloning lucianoffice into apps/:
 #   sh apps/lucianoffice/scripts/install.sh
-# Apps go in lucianos/apps; the tools (mnns, vetusiapl2webpl) go beside lucianos.
+# Apps go in lucianos/apps; the tools (mnns, vetusiapl2webpl, Starlog) go beside lucianos.
 set -e
 if [ ! -f server.js ] || [ ! -d apps ]; then
   echo "Run this from your lucianos folder (the one with server.js and apps/)." >&2
@@ -29,6 +29,7 @@ done
 # Tools the apps run as Prolog jobs (beside lucianos, like your other repos)
 get "$TOOLS/mnns" mnns                         # Optimise with mnns (Lucian Office, fastos)
 get "$TOOLS/vetusiapl2webpl" vetusiapl2webpl   # funnels (Tabler)
+get "$TOOLS/Starlog" Starlog                   # presentations (Visual Starlog)
 
 echo
 echo "Done. Restart LucianOS (npm start) and open http://localhost:4170/."
