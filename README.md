@@ -49,10 +49,12 @@ git clone https://github.com/luciangreen/presenter      # slide decks (uses coun
 git clone https://github.com/luciangreen/etcher         # drawings, flowcharts, filters
 git clone https://github.com/luciangreen/tabler         # Prolog database websites and funnels
 git clone https://github.com/luciangreen/studio         # Sound Sequencer MR
+git clone https://github.com/luciangreen/moviemr        # Movie MR: video boards in 3D, made into one MP4
+git clone https://github.com/luciangreen/visualstarlog  # presentations written in Prolog with Starlog
 cd ..
 ```
 
-Every app needs `lucianoffice` beside it, and Presenter also reads Counter workbooks through `counter`. Movie MR and Visual Starlog will be added here as their phases are built.
+Every app needs `lucianoffice` beside it, and Presenter also reads Counter workbooks through `counter`.
 
 ### 3. The tools the apps use
 
@@ -84,7 +86,7 @@ sh apps/lucianoffice/scripts/install.sh
 npm start
 ```
 
-Open http://localhost:4170/. The apps are in the Apps menu, and each also opens at its own address: http://localhost:4170/apps/lucianoffice/, /apps/writer/, /apps/counter/, /apps/presenter/, /apps/etcher/, /apps/tabler/ and /apps/studio/. The business coach is at /apps/lucianoffice/coach.html.
+Open http://localhost:4170/. The apps are in the Apps menu, and each also opens at its own address: http://localhost:4170/apps/lucianoffice/, /apps/writer/, /apps/counter/, /apps/presenter/, /apps/etcher/, /apps/tabler/, /apps/studio/, /apps/moviemr/ and /apps/visualstarlog/. The business coach is at /apps/lucianoffice/coach.html.
 
 To use the apps on an iPhone, follow [remote mode](https://github.com/luciangreen/lucianos#remote-mode-iphone-through-tailscale) in the LucianOS README.
 
