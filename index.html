@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lucian Office</title>
+  <link rel="stylesheet" href="/shared/style.css">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="bar office-bar">
+    <h1>Lucian Office</h1>
+    <span class="spacer"></span>
+    <label class="yl">Year level <select id="year"></select></label>
+    <button id="open">Open…</button>
+    <button id="save">Save</button>
+  </header>
+  <main class="office">
+    <section class="panel describe">
+      <h2>Describe it</h2>
+      <textarea id="input" class="editor" rows="9" spellcheck="true" placeholder="Write statements and rules in plain English, for example:
+Ann is 190 cm tall. Ben is 160 cm tall. Ann is tall. Ben is not tall.
+Tall people play basketball. Ann is a person. Ben is a person.
+Who plays basketball?"></textarea>
+      <div class="row">
+        <button id="convert" class="primary">Convert</button>
+        <button id="optimise" title="Optimise the Prolog with mnns (needs SWI-Prolog and the mnns repo)">Optimise with mnns</button>
+        <span id="status" class="status quiet" role="status"></span>
+      </div>
+      <div id="questions" class="questions" aria-live="polite"></div>
+      <h2>Data <small class="quiet">(your answers; they change the result)</small></h2>
+      <div id="data" class="data"></div>
+      <button id="addData" class="small">Add a Data item</button>
+      <h2>Opinion</h2>
+      <textarea id="opinion" rows="3" placeholder="What do you think of it? How could it be better?"></textarea>
+      <h2>Tell Lucian</h2>
+      <form id="say" class="row"><input id="sayText" type="text" placeholder='e.g. "remember that tall is 180", "undo that", "what changed"'><button>Do</button></form>
+      <p id="reply" class="quiet" aria-live="polite"></p>
+    </section>
+    <section class="panel results">
+      <nav class="tabs" role="tablist" id="tabs"></nav>
+      <div id="tab" class="tab"></div>
+    </section>
+  </main>
+</body>
+</html>

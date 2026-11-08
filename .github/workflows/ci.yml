@@ -1,0 +1,30 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check out mnns (optimiser and proof checker)
+        uses: actions/checkout@v4
+        with:
+          repository: luciangreen/mnns
+          path: mnns
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install SWI-Prolog
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes swi-prolog-nox
+      - name: Unit tests
+        run: npm test
+      - name: Converter against SWI-Prolog and mnns
+        env:
+          MNNS_DIR: ${{ github.workspace }}/mnns
+        run: npm run check-prolog

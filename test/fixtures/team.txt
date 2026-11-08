@@ -1,0 +1,7 @@
+Ann's age is 40. Ben's age is 30. Cal's age is 25.
+Ann works for Acme. Ben works for Acme. Cal works for Zeta.
+Ann is busy.
+If X works for Acme and X is not busy then X is available.
+If X is older than Y and X works for Acme then X mentors Y.
+If X is available or X is a manager then X can help.
+Who is available? Who mentors Cal? Is Ann older than Ben?

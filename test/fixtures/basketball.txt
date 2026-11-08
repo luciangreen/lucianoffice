@@ -1,0 +1,4 @@
+Ann is 190 cm tall. Ben is 160 cm tall. Cal is 178 cm tall.
+Ann is tall. Ben is not tall.
+Ann is a person. Ben is a person. Cal is a person.
+Tall people play basketball. Who plays basketball?

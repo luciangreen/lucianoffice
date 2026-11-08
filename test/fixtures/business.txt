@@ -1,0 +1,5 @@
+Every customer is a person. Ann is a customer. Ben is a customer.
+Ann's spend is 500. Ben's spend is 80.
+If X is a customer and X's spend is at least 100 then X is valuable.
+Add up the spend of all customers.
+Who is valuable? What is the total spend?

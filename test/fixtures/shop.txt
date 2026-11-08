@@ -1,0 +1,7 @@
+The pen costs $3. The book costs $12. The lamp costs $40.
+The pen is an item. The book is an item. The lamp is an item.
+The total price is the sum of the price of every item.
+The average price is the average of the price of every item.
+Count the items.
+If something is an item and its price is more than 20 then it is expensive.
+What is the total price? What is the number of items? Who is expensive?

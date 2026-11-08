@@ -1,0 +1,2 @@
+Socrates is a man. Plato is a man. Every man is mortal. Socrates teaches Plato.
+If X teaches Y then X knows Y. Is Socrates mortal? Who is mortal? Who knows Plato?
