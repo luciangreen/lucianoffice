@@ -50,7 +50,7 @@ git clone https://github.com/luciangreen/studio         # Sound Sequencer MR
 cd ..
 ```
 
-Every app needs `lucianoffice` beside it, and Presenter also reads Counter workbooks through `counter`. Studio, Movie MR and Visual Starlog will be added here as their phases are built.
+Every app needs `lucianoffice` beside it, and Presenter also reads Counter workbooks through `counter`. Movie MR and Visual Starlog will be added here as their phases are built.
 
 ### 3. The tools the apps use
 
