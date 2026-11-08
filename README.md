@@ -12,14 +12,80 @@ The work is done by algorithms you can open and improve. The core never calls Cl
 
 ## Install
 
-Clone this repo into LucianOS's `apps` folder, so it sits at `lucianos/apps/lucianoffice`, and restart LucianOS. **Lucian Office** then appears with the other apps. It runs in the browser on a computer or a phone.
+Lucian Office runs inside [LucianOS](https://github.com/luciangreen/lucianos): the apps share its server, password, files, character and Claude settings. Each app has its own repo, and all of them sit side by side in LucianOS's `apps` folder.
+
+### What you need
+
+- **Node.js 20 or newer** (`node --version`), to run LucianOS. It needs nothing else installed.
+- **SWI-Prolog** (`swipl --version`), for Optimise with mnns, Grammar Logic in GL Inspire, funnels and Tabler sites. On a Mac: `brew install swi-prolog`.
+- **Git**, to clone the repos.
+
+### 1. LucianOS
+
+Skip this if you already have LucianOS.
 
 ```sh
-cd lucianos/apps
-git clone https://github.com/luciangreen/lucianoffice
+git clone https://github.com/luciangreen/lucianos
+cd lucianos
+cp config.example.json config.json   # edit "root" if you want a smaller suite folder than your home folder
 ```
 
-To use **Optimise with mnns**, you also need SWI-Prolog and the [mnns](https://github.com/luciangreen/mnns) repo. The window asks where mnns is the first time, as a folder relative to your LucianOS home (for example `GitHub/mnns`).
+To use Grammar Logic in GL Inspire, put `lucianos` in `Dropbox/GitHub-private2` with your other repos. The [LucianOS README](https://github.com/luciangreen/lucianos#needed-for-grammar-logic-and-breasoning) explains this, including the `~/Dropbox` link.
+
+### 2. The Lucian Office apps
+
+From the `lucianos` folder:
+
+```sh
+cd apps
+git clone https://github.com/luciangreen/lucianoffice   # the core: Converter, year level, documents, commands, plug-ins
+git clone https://github.com/luciangreen/writer         # word processor, GL Inspire, Chatbot App Authorer
+git clone https://github.com/luciangreen/counter        # spreadsheet, proformas, segment graphs
+git clone https://github.com/luciangreen/presenter      # slide decks (uses counter for workbooks)
+git clone https://github.com/luciangreen/etcher         # drawings, flowcharts, filters
+git clone https://github.com/luciangreen/tabler         # Prolog database websites and funnels
+cd ..
+```
+
+Every app needs `lucianoffice` beside it, and Presenter also reads Counter workbooks through `counter`. Studio, Movie MR and Visual Starlog will be added here as their phases are built.
+
+### 3. The tools the apps use
+
+Clone these beside `lucianos` (in the same folder as your other repos, such as `Dropbox/GitHub-private2`). The apps ask where each one is the first time it's needed.
+
+```sh
+cd ..                                                   # the folder that holds lucianos
+git clone https://github.com/luciangreen/mnns            # Optimise with mnns (Lucian Office, fastos)
+git clone https://github.com/luciangreen/vetusiapl2webpl # turns funnels into web servers (Tabler)
+```
+
+| Used by | Repos (beside lucianos) | What for |
+| --- | --- | --- |
+| Lucian Office, fastos | `mnns` | Optimise with mnns |
+| Tabler funnels | `vetusiapl2webpl` | Converting funnels to web servers |
+| Writer (GL Inspire) | `Algorithm-Writer-with-Lists`, `Text-to-Breasonings`, `listprologinterpreter`, `Philosophy`, `Languages`, `List-Prolog-to-Prolog-Converter`, `Prolog-to-List-Prolog`, `SSI`, `culturaltranslationtool` | Grammar Logic. Install these with [Time Machine](https://github.com/luciangreen/Time_Machine), as the LucianOS README says. GL Inspire still works without them, from your bio and recent texts. |
+
+### Or all at once
+
+After cloning `lucianoffice` into `apps/`, this clones (or updates) every app above and `mnns` and `vetusiapl2webpl`. Run it from the `lucianos` folder:
+
+```sh
+sh apps/lucianoffice/scripts/install.sh
+```
+
+### 4. Start
+
+```sh
+npm start
+```
+
+Open http://localhost:4170/. The apps are in the Apps menu, and each also opens at its own address: http://localhost:4170/apps/lucianoffice/, /apps/writer/, /apps/counter/, /apps/presenter/, /apps/etcher/ and /apps/tabler/.
+
+To use the apps on an iPhone, follow [remote mode](https://github.com/luciangreen/lucianos#remote-mode-iphone-through-tailscale) in the LucianOS README.
+
+### Updating
+
+Run `sh apps/lucianoffice/scripts/install.sh` again, or `git pull` in each app's folder.
 
 ## The window
 
