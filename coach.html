@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Business coach · Lucian Office</title>
+  <link rel="stylesheet" href="/shared/style.css">
+  <link rel="stylesheet" href="coach.css">
+  <script type="module" src="coach.js"></script>
+</head>
+<body>
+  <header class="bar cbar">
+    <h1>Business coach</h1>
+    <input id="title" class="title" aria-label="Business name" value="My business">
+    <span class="spacer"></span>
+    <label class="quiet small"><input type="checkbox" id="sync" checked> In the LucianOS checklist</label>
+    <button id="undo">Undo</button>
+    <button id="redo">Redo</button>
+    <button id="open">Open…</button>
+    <button id="save">Save</button>
+    <a class="button" href="./">Office</a>
+  </header>
+  <div id="remind" class="remind" aria-live="polite"></div>
+  <main class="coach">
+    <nav class="panel loop" aria-label="The steps">
+      <ol id="steps" class="steps"></ol>
+      <button id="addStep" type="button">Add a step</button>
+    </nav>
+    <section class="panel" id="step"></section>
+  </main>
+  <form id="say" class="row say"><input id="sayText" type="text" placeholder='Tell Lucian: "what&apos;s next", "I&apos;ve finished the market research", "I spent $40 on search ads", "how is the business doing"'><button>Do</button></form>
+  <p id="reply" class="quiet" aria-live="polite"></p>
+</body>
+</html>

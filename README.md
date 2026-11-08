@@ -8,6 +8,8 @@ The core of Lucian Office, the office suite inside [LucianOS](https://github.com
 4. **Command API**: each app registers commands that the RetroMR character can do and undo.
 5. **Plug-ins**: a small interface for add-ons such as GL Inspire, the Chatbot App Authorer and Etcher's filters.
 
+It also holds the **business coach** (below), and the funnel figures Tabler and the coach share.
+
 The work is done by algorithms you can open and improve. The core never calls Claude.
 
 ## Install
@@ -227,11 +229,29 @@ await plugins.run('shout', doc, { selection });
 
 A plug-in runs on a selection, and its result is one undoable step recorded as `plugin:<id>`.
 
+## Business coach
+
+Open it with **Business coach** in the Office window, or from the LucianOS checklist (each step opens `/apps/lucianoffice/?coach=<step>`). It takes one owner from an idea to a running business, round a loop of six steps:
+
+1. **Mind-map the idea**: the idea in one sentence, who it is for, the problem, the offer, price, channels and competitors, drawn as a mind map with the idea's keywords (the words used most, leaving out common ones). **Grammar Logic on it** runs LucianOS's Grammar Logic on the main keyword. Choosing a kind of business (education, computing, music composition, acting) suggests products and the Lucian Office apps to make them in.
+2. **Research the market**, every week.
+3. **Build the funnel** in Tabler.
+4. **Publish to a VPS**: your domain and VPS companies, domain, IP address and costs, then nine steps filled in with your details (the ssh key, installing SWI-Prolog, the DNS record, the folder, publishing from Tabler, trying it), with commands to copy. It's based on *Setting up a VPS with TextToBr*; the providers and prices are yours. The costs are worked out per month, per year and for the first year.
+5. **Budget advertising**, every month: a monthly amount split across channels by share. Log each payment; it shows what's spent and left, what you can spend each remaining day, and where the month is heading at the current pace, and warns before you go over.
+6. **Track spend and returns**, every week: the funnel's own records (from Tabler) and your sales, against the ad spend you logged and the VPS and domain costs. Visits, sign-ups, rates, sales, revenue, ad spend, running costs, profit, return on ad spend, and cost per sign-up and per sale, each compared with the period before. **How?** under each figure shows how it was worked out, with a box for your opinion of the method. The **next improvement** comes from rules you can read and change (judge after 100 visits; sign-up rate below 20% → the landing page; chose-to-buy below 10% → the offer; paid below 50% → the payment page; return below 1× → the ads; at 2× or more → raise the budget by a fifth), and says why, with the numbers.
+
+Every step has a check-in question, your notes, tasks you can tick, add and remove, and a repeat (once, daily, weekly, monthly...). Any step can be turned off, and you can add your own steps anywhere in the loop. Each change is one undoable step.
+
+**Reminders**: the coach shows what's next and which repeating steps are due again, and the character says the first one each day. With **In the LucianOS checklist** on, the steps are kept in LucianOS's checklist (as weekly or monthly items), so the morning question reminds you even when the coach is closed. That needs LucianOS's `lucianos.checklist` support.
+
+**Tell Lucian**: "what's next", "what's due", "my idea is…", "I've finished the market research", "turn off publishing", "add a task to research: call three customers", "add a step called Write a newsletter", "set my ad budget to $300 a month" (or "$70 a week"), "I spent $40 on search ads", "how is the budget", "how is the business doing", "undo that".
+
 ## Tests
 
 ```sh
 npm test               # unit tests (Node 20+, no dependencies)
 npm run check-prolog   # needs swipl; set MNNS_DIR to an mnns checkout to include optimising
+npm run check-coach -- funnel_events.pl   # the coach's figures against a funnel's records
 ```
 
 `check-prolog` converts every sample text in `test/fixtures` and checks four things:
@@ -241,7 +261,7 @@ npm run check-prolog   # needs swipl; set MNNS_DIR to an mnns checkout to includ
 - with `MNNS_DIR` set, mnns optimises each program;
 - any rewrite from mnns gives the same answers.
 
-GitHub Actions runs both commands with real SWI-Prolog and mnns.
+GitHub Actions runs both commands with real SWI-Prolog and mnns. It also runs a real funnel: Tabler's funnel check converts it with vetusiapl2webpl, walks it in SWI-Prolog and keeps what it recorded. `check-coach` then reads those records the coach's way and by counting the lines, and checks that visits, sign-ups, choices, sales matched by email, ad spend, running costs and profit agree.
 
 ## Limits
 

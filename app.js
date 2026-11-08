@@ -2,6 +2,9 @@
 // answer the follow-up questions, and see the Prolog, the proof, the readable text at your
 // year level, and the first version in each app's format.
 import { api } from '/shared/api.js';
+
+// LucianOS opens the business coach as /apps/lucianoffice/?coach=<step> (from its checklist).
+if (new URLSearchParams(location.search).has('coach')) location.replace(`coach.html${location.search}`);
 import {
   YEAR_LEVELS, acceptOptimised, apply, changeLog, characterHandler, convert, createCommands, createDocument,
   deserialise, optimiseJobSpec, serialise, showProgram, toProlog, undoLastBy

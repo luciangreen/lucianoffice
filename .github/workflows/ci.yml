@@ -10,11 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: lucianoffice
       - name: Check out mnns (optimiser and proof checker)
         uses: actions/checkout@v4
         with:
           repository: luciangreen/mnns
           path: mnns
+      - name: Check out Tabler beside the core, as in lucianos/apps (its funnel feeds the coach's check)
+        uses: actions/checkout@v4
+        with:
+          repository: luciangreen/tabler
+          path: tabler
+      - name: Check out vetusiapl2webpl (turns the funnel into a web server)
+        uses: actions/checkout@v4
+        with:
+          repository: luciangreen/vetusiapl2webpl
+          path: vetusiapl2webpl
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -23,8 +35,19 @@ jobs:
           sudo apt-get update
           sudo apt-get install --yes swi-prolog-nox
       - name: Unit tests
+        working-directory: lucianoffice
         run: npm test
       - name: Converter against SWI-Prolog and mnns
+        working-directory: lucianoffice
         env:
           MNNS_DIR: ${{ github.workspace }}/mnns
         run: npm run check-prolog
+      - name: Run a real funnel and keep its records
+        working-directory: tabler
+        env:
+          VETUSIA_DIR: ${{ github.workspace }}/vetusiapl2webpl
+          EVENTS_OUT: ${{ github.workspace }}/funnel_events.pl
+        run: npm run check-funnel
+      - name: The coach's figures match the funnel's records
+        working-directory: lucianoffice
+        run: npm run check-coach -- ${{ github.workspace }}/funnel_events.pl

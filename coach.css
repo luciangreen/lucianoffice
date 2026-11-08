@@ -1,0 +1,59 @@
+body { margin: 0; }
+.cbar { flex-wrap: wrap; gap: 8px; }
+.cbar .title { font: inherit; font-weight: 600; border: 1px solid transparent; background: transparent; padding: 4px 6px; min-width: 8em; }
+a.button { display: inline-block; padding: 6px 12px; border: 1px solid #8886; border-radius: 6px; text-decoration: none; color: inherit; }
+.remind { margin: 10px 12px 0; padding: 8px 12px; border: 2px solid #e2a03f; border-radius: 8px; background: #fff8ec; }
+.remind:empty { display: none; }
+.remind p { margin: 2px 0; }
+main.coach { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); gap: 12px; padding: 12px; align-items: start; }
+.coach .panel { margin: 0; min-width: 0; }
+.steps { list-style: none; margin: 0 0 10px; padding: 0; }
+.steps li { margin: 4px 0; }
+.steps button.step { width: 100%; display: flex; gap: 8px; align-items: center; text-align: left; padding: 8px 10px; }
+.steps button.step.on { border-color: #3a7bd5; background: #eef4ff; font-weight: 600; }
+.steps .num { width: 1.6em; height: 1.6em; border-radius: 50%; display: inline-grid; place-items: center; font-size: .8em; background: #eee; flex: none; }
+.steps .st { margin-left: auto; font-size: .78em; padding: 1px 7px; border-radius: 10px; background: #eee; font-weight: normal; white-space: nowrap; }
+.st.done { background: #dff3e8; color: #1d6b45; } .st.due { background: #ffe9c7; color: #8a5300; } .st.todo { background: #e6eefc; color: #2a4d8f; } .st.off { background: #eee; color: #777; }
+.coach h2 { font-size: 1.3rem; margin: 4px 0 6px; color: inherit; font-weight: 700; }
+.coach h3 { font-size: .95rem; margin: 16px 0 6px; }
+.coach label { display: block; margin: 6px 0; font-size: .9em; }
+.coach label > input:not([type=checkbox]), .coach label > textarea, .coach label > select { display: block; width: 100%; box-sizing: border-box; font: inherit; margin-top: 2px; }
+.coach textarea { min-height: 4em; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 8px; }
+.row > input[type=text] { flex: 1; min-width: 6em; }
+.row label { flex: 1; min-width: 8em; }
+.checkin { border-left: 4px solid #3a7bd5; padding: 6px 10px; background: #f4f7fc; border-radius: 0 6px 6px 0; }
+.tasks { list-style: none; padding: 0; margin: 0; }
+.tasks li { display: flex; gap: 8px; align-items: center; margin: 4px 0; }
+.tasks li.done span { text-decoration: line-through; color: #777; }
+.tasks li span { flex: 1; }
+.note { font-size: .85em; color: #555; }
+table.fig { border-collapse: collapse; width: 100%; }
+table.fig td, table.fig th { border-bottom: 1px solid #8883; padding: 6px 6px; text-align: left; vertical-align: top; }
+table.fig td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.up { color: #1d6b45; } .down { color: #a33; }
+details.how summary { cursor: pointer; color: #3a5a8c; font-size: .85em; }
+details.how p { margin: 4px 0; font-size: .85em; }
+details.how input { width: 100%; box-sizing: border-box; font: inherit; font-size: .85em; }
+.advice { border: 2px solid #2e9e6b; background: #eefaf3; border-radius: 8px; padding: 8px 12px; margin: 10px 0; }
+.advice.warn { border-color: #e2a03f; background: #fff8ec; }
+.mm { display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start; }
+.mm .centre { flex: 1 1 100%; text-align: center; font-weight: 600; padding: 10px; border: 2px solid #3a7bd5; border-radius: 20px; background: #eef4ff; }
+.mm .branch { flex: 1 1 140px; border: 1px solid #8885; border-radius: 10px; padding: 6px 10px; }
+.mm .branch b { display: block; font-size: .85em; color: #3a5a8c; }
+.mm .branch ul { margin: 4px 0 0; padding-left: 1.1em; font-size: .9em; }
+.kw { display: inline-block; margin: 2px 4px 2px 0; padding: 1px 8px; border-radius: 10px; background: #f0ece0; font-size: .85em; }
+pre.cmd { background: #f4f6fa; padding: 6px 8px; border-radius: 6px; overflow-x: auto; margin: 4px 0; font-size: .85em; }
+.vstep { border: 1px solid #8884; border-radius: 8px; padding: 6px 10px; margin: 6px 0; }
+.vstep.done { opacity: .65; }
+.vstep > label { display: flex; gap: 8px; align-items: center; font-weight: 600; font-size: .95em; margin: 0; }
+.vstep p { margin: 4px 0; font-size: .9em; }
+.say { margin: 0 12px; }
+#reply { margin: 6px 12px 14px; }
+@media (max-width: 760px) {
+  main.coach { grid-template-columns: 1fr; padding: 8px; }
+  .steps { display: flex; gap: 4px; overflow-x: auto; }
+  .steps li { margin: 0; flex: none; }
+  .steps button.step { width: auto; }
+  .cbar h1 { font-size: 1.1rem; }
+}

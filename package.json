@@ -1,12 +1,13 @@
 {
   "name": "lucianoffice",
   "version": "0.1.0",
-  "description": "Lucian Office core: the Converter (text to Prolog and back, proved), year level, Office documents, commands and plug-ins",
+  "description": "Lucian Office core: the Converter (text to Prolog and back, proved), year level, Office documents, commands, plug-ins and the business coach",
   "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "node --test test/*.test.js",
-    "check-prolog": "node scripts/check-prolog.mjs"
+    "check-prolog": "node scripts/check-prolog.mjs",
+    "check-coach": "node scripts/check-coach.mjs"
   },
   "license": "BSD-3-Clause"
 }
