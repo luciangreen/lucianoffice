@@ -1,0 +1,402 @@
+Lucian Office core: 200 inputs and outputs, from real runs (npm run ios writes this file; npm test checks it).
+
+1. textToProlog("Alice is tall. Dan is a student. Is dan happy?")
+   => "tall(alice).\nstudent(dan)."
+2. convert("Bob is happy. Alice is happy. Every student is kind. Is alice happy?", "1")
+   => {"prolog":":- dynamic student/1.\nhappy(bob).\nhappy(alice).\nkind(X) :-\n    student(X).","text":"Bob is happy.\nAlice is happy.\nEvery student is kind.","readable":"Bob is happy. Alice is happy. Every student is kind.","proof":true,"answers":[]}
+3. sentences("Blue thinks garden sells about house book. Idea house dog music house a runs teacher.")
+   => ["Blue thinks garden sells about house book.","Idea house dog music house a runs teacher."]
+4. plural("box")
+   => "boxes"
+5. singular("apple")
+   => "apple"
+6. wordRank("sheep")
+   => "Infinity"
+7. measure("Logic happy list. Music dog meditates teacher runs buys cat data buys.", "pg")
+   => {"level":{"id":"pg","label":"Postgraduate","maxWords":35,"maxRank":"Infinity","maxNewTerms":12},"paragraphs":[{"sentences":[{"text":"Logic happy list.","words":3,"hard":["Logic"],"tooLong":false,"tooHard":[],"reasons":[]},{"text":"Music dog meditates teacher runs buys cat data buys.","words":9,"hard":["meditates","buys","data","buys"],"tooLong":false,"tooHard":[],"reasons":[]}],"newTerms":["logic","meditates","buys","data"],"tooManyNewTerms":false}],"stats":{"sentences":2,"averageWords":6,"longest":9,"hardWords":5,"hardShare":41.7,"mostNewTerms":4},"ok":true,"problems":0}
+8. simplify("The big sheep demonstrates true thinks.", "pg")
+   => {"text":"The big sheep demonstrates true thinks.","changes":0}
+9. funnelStats("funnel_event(1468, checkout, 'u1@example.com').\nfunnel_event(1943, visit, []).\nfunnel_event(2025, visit, []).")
+   => {"visits":2,"signups":0,"checkouts":1,"declined":0,"signupRate":0,"checkoutRate":0,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+10. parseMoney("AUD 32,432.50 a month")
+   => 32432.5
+11. daysBetween("2026-01-23", "2027-04-05")
+   => 437
+12. addDays("2025-11-09", 23)
+   => "2025-12-02"
+13. document edits and undo("about runs", ["Student runs buys."], 1)
+   => {"title":"about runs","blocks":[]}
+14. textToProlog("Carol is tall. Is dan happy?")
+   => "tall(carol)."
+15. convert("Dan is happy. Every teacher is happy.", "pg")
+   => {"prolog":":- dynamic teacher/1.\nhappy(dan).\nhappy(X) :-\n    teacher(X).","text":"Dan is happy.\nEvery teacher is happy.","readable":"Dan is happy. Every teacher is happy.","proof":true,"answers":[]}
+16. sentences("True blue blue garden.")
+   => ["True blue blue garden."]
+17. plural("teacher")
+   => "teachers"
+18. singular("apple")
+   => "apple"
+19. wordRank("person")
+   => 389
+20. measure("False runs data true number. Music tree runs garden logic value cat.", "1")
+   => {"level":{"id":"1","label":"Year 1","maxWords":8,"maxRank":250,"maxNewTerms":0},"paragraphs":[{"sentences":[{"text":"False runs data true number.","words":5,"hard":["False","data","true"],"tooLong":false,"tooHard":["False","data","true"],"reasons":["hard for Year 1: False, data, true"]},{"text":"Music tree runs garden logic value cat.","words":7,"hard":["Music","garden","logic","value","cat"],"tooLong":false,"tooHard":["Music","garden","logic","value","cat"],"reasons":["hard for Year 1: Music, garden, logic, value, cat"]}],"newTerms":["false","data","true","music","garden","logic","value","cat"],"tooManyNewTerms":true}],"stats":{"sentences":2,"averageWords":6,"longest":7,"hardWords":8,"hardShare":66.7,"mostNewTerms":8},"ok":false,"problems":3}
+21. simplify("The utilise teacher demonstrates tree music the simple runs.", "pg")
+   => {"text":"The use teacher demonstrates tree music the simple runs.","changes":1}
+22. funnelStats("funnel_event(1214, checkout, 'u2@example.com').\nfunnel_event(1483, checkout, 'u4@example.com').")
+   => {"visits":0,"signups":0,"checkouts":2,"declined":0,"signupRate":0,"checkoutRate":0,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+23. parseMoney("$63,172.50")
+   => 63172.5
+24. daysBetween("2025-06-25", "2026-05-10")
+   => 319
+25. addDays("2026-01-26", 198)
+   => "2026-08-12"
+26. document edits and undo("number reads", ["The meditates thinks number thinks about value student."], 0)
+   => {"title":"number reads","blocks":["The meditates thinks number thinks about value student."]}
+27. textToProlog("Carol is happy. Bob is a teacher. Every teacher is kind. Is dan happy?")
+   => "happy(carol).\nteacher(bob).\nkind(X) :-\n    teacher(X)."
+28. convert("Bob is tall. Bob is tall. Every teacher is busy.", "1")
+   => {"prolog":":- dynamic teacher/1.\ntall(bob).\ntall(bob).\nbusy(X) :-\n    teacher(X).","text":"Bob is tall.\nBob is tall.\nEvery teacher is busy.","readable":"Bob is tall. Bob is tall. Every teacher is busy.","proof":true,"answers":[]}
+29. sentences("Music a number list apple student happy.")
+   => ["Music a number list apple student happy."]
+30. plural("mouse")
+   => "mice"
+31. singular("church")
+   => "church"
+32. wordRank("tomato")
+   => "Infinity"
+33. measure("Sells cat apple true data happy simple. Algorithm green reads writes buys tree. With algorithm buys.", "pg")
+   => {"level":{"id":"pg","label":"Postgraduate","maxWords":35,"maxRank":"Infinity","maxNewTerms":12},"paragraphs":[{"sentences":[{"text":"Sells cat apple true data happy simple.","words":7,"hard":["data"],"tooLong":false,"tooHard":[],"reasons":[]},{"text":"Algorithm green reads writes buys tree.","words":6,"hard":["Algorithm","buys"],"tooLong":false,"tooHard":[],"reasons":[]},{"text":"With algorithm buys.","words":3,"hard":["algorithm","buys"],"tooLong":false,"tooHard":[],"reasons":[]}],"newTerms":["data","algorithm","buys"],"tooManyNewTerms":false}],"stats":{"sentences":3,"averageWords":5.3,"longest":7,"hardWords":5,"hardShare":31.3,"mostNewTerms":3},"ok":true,"problems":0}
+34. simplify("The utilise baby demonstrates person garden true.", "12")
+   => {"text":"The use baby demonstrates person garden true.","changes":1}
+35. funnelStats("funnel_event(1092, checkout, 'u1@example.com').\nfunnel_event(1571, visit, []).\nfunnel_event(1997, checkout, 'u3@example.com').\nfunnel_event(2216, visit, []).")
+   => {"visits":2,"signups":0,"checkouts":2,"declined":0,"signupRate":0,"checkoutRate":0,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+36. parseMoney("about $64,625 a month")
+   => 64625
+37. daysBetween("2026-02-05", "2027-04-01")
+   => 420
+38. addDays("2025-04-28", 238)
+   => "2025-12-22"
+39. document edits and undo("apple number", ["Cat book number false prolog prolog teacher list."], 1)
+   => {"title":"apple number","blocks":[]}
+40. textToProlog("Dan is a student. Carol is happy. Is dan happy?")
+   => "student(dan).\nhappy(carol)."
+41. convert("Carol is a student.", "12")
+   => {"prolog":"student(carol).","text":"Carol is a student.","readable":"Carol is a student.","proof":true,"answers":[]}
+42. sentences("Blue blue garden.")
+   => ["Blue blue garden."]
+43. plural("city")
+   => "cities"
+44. singular("baby")
+   => "baby"
+45. wordRank("student")
+   => 781
+46. measure("Runs value runs.", "6")
+   => {"level":{"id":"6","label":"Year 6","maxWords":16,"maxRank":1000,"maxNewTerms":3},"paragraphs":[{"sentences":[{"text":"Runs value runs.","words":3,"hard":[],"tooLong":false,"tooHard":[],"reasons":[]}],"newTerms":[],"tooManyNewTerms":false}],"stats":{"sentences":1,"averageWords":3,"longest":3,"hardWords":0,"hardShare":0,"mostNewTerms":0},"ok":true,"problems":0}
+47. simplify("The commence apple shows sells idea reads teacher data.", "6")
+   => {"text":"The start apple shows sells idea reads teacher data.","changes":1}
+48. funnelStats("funnel_event(1499, checkout, 'u1@example.com').\nfunnel_event(1809, signup, ['U5', 'u2@example.com']).\nfunnel_event(1834, signup, ['U2', 'u1@example.com']).\nfunnel_event(2065, checkout, 'u2@example.com').\nfunnel_event(2519, signup, ['U1', 'u3@example.com']).\nfunnel_event(2707, declined, 'u4@example.com').\nfunnel_event(2950, visit, []).")
+   => {"visits":1,"signups":3,"checkouts":2,"declined":1,"signupRate":300,"checkoutRate":66.7,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+49. parseMoney("$55,093 a month")
+   => 55093
+50. daysBetween("2025-07-07", "2024-04-09")
+   => -454
+51. addDays("2025-08-17", -6)
+   => "2025-08-11"
+52. document edits and undo("a blue", ["And apple the green.","Dog tree list with teacher tree student.","Sells with happy runs writes number dog."], 2)
+   => {"title":"a blue","blocks":["And apple the green."]}
+53. textToProlog("Dan is a student. Every teacher is happy. Is dan happy?")
+   => "student(dan).\nhappy(X) :-\n    teacher(X)."
+54. convert("Bob is a teacher. Carol is happy. Every teacher is busy.", "6")
+   => {"prolog":"teacher(bob).\nhappy(carol).\nbusy(X) :-\n    teacher(X).","text":"Bob is a teacher.\nCarol is happy.\nEvery teacher is busy.","readable":"Bob is a teacher. Carol is happy. Every teacher is busy.","proof":true,"answers":[]}
+55. sentences("Blue simple writes false about green true. Green green simple algorithm proof garden.")
+   => ["Blue simple writes false about green true.","Green green simple algorithm proof garden."]
+56. plural("tomato")
+   => "tomatoes"
+57. singular("mouse")
+   => "mouse"
+58. wordRank("sheep")
+   => "Infinity"
+59. measure("Runs buys green with idea.", "6")
+   => {"level":{"id":"6","label":"Year 6","maxWords":16,"maxRank":1000,"maxNewTerms":3},"paragraphs":[{"sentences":[{"text":"Runs buys green with idea.","words":5,"hard":["buys"],"tooLong":false,"tooHard":["buys"],"reasons":["hard for Year 6: buys"]}],"newTerms":["buys"],"tooManyNewTerms":false}],"stats":{"sentences":1,"averageWords":5,"longest":5,"hardWords":1,"hardShare":20,"mostNewTerms":1},"ok":false,"problems":1}
+60. simplify("The commence church facilitates dog thinks.", "1")
+   => {"text":"The start church facilitates dog thinks.","changes":1}
+61. funnelStats("funnel_event(1333, visit, []).\nfunnel_event(1516, checkout, 'u5@example.com').\nfunnel_event(1565, visit, []).\nfunnel_event(1653, signup, ['U1', 'u1@example.com']).\nfunnel_event(1860, visit, []).\nfunnel_event(1975, visit, []).\nfunnel_event(2251, declined, 'u5@example.com').")
+   => {"visits":4,"signups":1,"checkouts":1,"declined":1,"signupRate":25,"checkoutRate":100,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+62. parseMoney("AUD 58,334.50")
+   => 58334.5
+63. daysBetween("2026-05-08", "2027-11-10")
+   => 551
+64. addDays("2027-11-28", 333)
+   => "2028-10-26"
+65. document edits and undo("finds teacher garden", ["Happy music proof number house apple number prolog.","Music happy meditates.","False book tree.","Number buys true."], 2)
+   => {"title":"finds teacher garden","blocks":["Happy music proof number house apple number prolog.","Music happy meditates."]}
+66. textToProlog("Dan is tall. Bob is happy. Alice is tall. Every student is kind.")
+   => "tall(dan).\nhappy(bob).\ntall(alice).\nkind(X) :-\n    student(X)."
+67. convert("Dan is happy. Bob is happy. Every student is busy. Is dan happy?", "3")
+   => {"prolog":":- dynamic student/1.\nhappy(dan).\nhappy(bob).\nbusy(X) :-\n    student(X).","text":"Dan is happy.\nBob is happy.\nEvery student is busy.","readable":"Dan is happy. Bob is happy. Every student is busy.","proof":true,"answers":[]}
+68. sentences("Garden quickly apple number cat cat.")
+   => ["Garden quickly apple number cat cat."]
+69. plural("box")
+   => "boxes"
+70. singular("baby")
+   => "baby"
+71. wordRank("baby")
+   => 601
+72. measure("Student writes student tree proof sells thinks green finds.", "6")
+   => {"level":{"id":"6","label":"Year 6","maxWords":16,"maxRank":1000,"maxNewTerms":3},"paragraphs":[{"sentences":[{"text":"Student writes student tree proof sells thinks green finds.","words":9,"hard":["proof"],"tooLong":false,"tooHard":["proof"],"reasons":["hard for Year 6: proof"]}],"newTerms":["proof"],"tooManyNewTerms":false}],"stats":{"sentences":1,"averageWords":9,"longest":9,"hardWords":1,"hardShare":11.1,"mostNewTerms":1},"ok":false,"problems":1}
+73. simplify("The commence leaf facilitates meditates student finds teacher teacher.", "pg")
+   => {"text":"The start leaf facilitates meditates student finds teacher teacher.","changes":1}
+74. funnelStats("funnel_event(1107, declined, 'u4@example.com').\nfunnel_event(1193, declined, 'u1@example.com').\nfunnel_event(1270, checkout, 'u1@example.com').\nfunnel_event(1333, visit, []).\nfunnel_event(1556, visit, []).\nfunnel_event(1603, visit, []).")
+   => {"visits":3,"signups":0,"checkouts":1,"declined":2,"signupRate":0,"checkoutRate":0,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+75. parseMoney("81,771.50 a month")
+   => 81771.5
+76. daysBetween("2027-10-03", "2027-02-06")
+   => -239
+77. addDays("2026-07-17", 4)
+   => "2026-07-21"
+78. document edits and undo("sells buys", ["Meditates cat sells data house person.","False blue and quickly simple."], 2)
+   => {"title":"sells buys","blocks":[]}
+79. textToProlog("Alice is a teacher. Bob is happy. Every student is busy.")
+   => "teacher(alice).\nhappy(bob).\nbusy(X) :-\n    student(X)."
+80. convert("Alice is a teacher. Carol is happy. Dan is a teacher.", "1")
+   => {"prolog":"teacher(alice).\nhappy(carol).\nteacher(dan).","text":"Alice is a teacher.\nCarol is happy.\nDan is a teacher.","readable":"Alice is a teacher. Carol is happy. Dan is a teacher.","proof":true,"answers":[]}
+81. sentences("Cat algorithm list a person book. Logic garden tree reads happy teacher. Number a thinks.")
+   => ["Cat algorithm list a person book.","Logic garden tree reads happy teacher.","Number a thinks."]
+82. plural("mouse")
+   => "mice"
+83. singular("knife")
+   => "knife"
+84. wordRank("baby")
+   => 601
+85. measure("Green with thinks tree prolog. And reads thinks algorithm happy the. List green happy value.", "1")
+   => {"level":{"id":"1","label":"Year 1","maxWords":8,"maxRank":250,"maxNewTerms":0},"paragraphs":[{"sentences":[{"text":"Green with thinks tree prolog.","words":5,"hard":["Green","prolog"],"tooLong":false,"tooHard":["Green","prolog"],"reasons":["hard for Year 1: Green, prolog"]},{"text":"And reads thinks algorithm happy the.","words":6,"hard":["algorithm","happy"],"tooLong":false,"tooHard":["algorithm","happy"],"reasons":["hard for Year 1: algorithm, happy"]},{"text":"List green happy value.","words":4,"hard":["List","green","happy","value"],"tooLong":false,"tooHard":["List","green","happy","value"],"reasons":["hard for Year 1: List, green, happy, value"]}],"newTerms":["green","prolog","algorithm","happy","list","value"],"tooManyNewTerms":true}],"stats":{"sentences":3,"averageWords":5,"longest":6,"hardWords":8,"hardShare":53.3,"mostNewTerms":6},"ok":false,"problems":4}
+86. simplify("The enormous knife demonstrates person prolog.", "12")
+   => {"text":"The enormous knife demonstrates person prolog.","changes":0}
+87. funnelStats("funnel_event(1341, visit, []).\nfunnel_event(1721, visit, []).\nfunnel_event(1888, visit, []).\nfunnel_event(1890, visit, []).\nfunnel_event(2108, visit, []).\nfunnel_event(2481, visit, []).\nfunnel_event(2976, checkout, 'u1@example.com').\nfunnel_event(3110, signup, ['U2', 'u5@example.com']).")
+   => {"visits":6,"signups":1,"checkouts":1,"declined":0,"signupRate":16.7,"checkoutRate":100,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+88. parseMoney("AUD 95,119 a month")
+   => 95119
+89. daysBetween("2027-12-03", "2026-04-27")
+   => -585
+90. addDays("2024-01-17", 12)
+   => "2024-01-29"
+91. document edits and undo("runs happy", ["Person house about meditates dog.","Cat teacher sells thinks."], 2)
+   => {"title":"runs happy","blocks":[]}
+92. textToProlog("Carol is tall. Dan is a student. Every teacher is busy. Is dan happy?")
+   => "tall(carol).\nstudent(dan).\nbusy(X) :-\n    teacher(X)."
+93. convert("Alice is tall. Carol is a student. Is dan happy?", "3")
+   => {"prolog":"tall(alice).\nstudent(carol).","text":"Alice is tall.\nCarol is a student.","readable":"Alice is tall. Carol is a student.","proof":true,"answers":[]}
+94. sentences("Buys apple green thinks. Meditates writes finds idea garden. Garden dog a data number blue runs. The tree proof sells music.")
+   => ["Buys apple green thinks.","Meditates writes finds idea garden.","Garden dog a data number blue runs.","The tree proof sells music."]
+95. plural("idea")
+   => "ideas"
+96. singular("idea")
+   => "idea"
+97. wordRank("leaf")
+   => "Infinity"
+98. measure("Blue false prolog buys sells proof. Data true sells finds garden garden true the garden. Apple data house proof prolog thinks value.", "3")
+   => {"level":{"id":"3","label":"Year 3","maxWords":12,"maxRank":550,"maxNewTerms":1},"paragraphs":[{"sentences":[{"text":"Blue false prolog buys sells proof.","words":6,"hard":["false","prolog","buys","sells","proof"],"tooLong":false,"tooHard":["false","prolog","buys","sells","proof"],"reasons":["hard for Year 3: false, prolog, buys, sells, proof"]},{"text":"Data true sells finds garden garden true the garden.","words":9,"hard":["Data","sells","garden","garden","garden"],"tooLong":false,"tooHard":["Data","sells","garden","garden","garden"],"reasons":["hard for Year 3: Data, sells, garden, garden, garden"]},{"text":"Apple data house proof prolog thinks value.","words":7,"hard":["Apple","data","proof","prolog","value"],"tooLong":false,"tooHard":["Apple","data","proof","prolog","value"],"reasons":["hard for Year 3: Apple, data, proof, prolog, value"]}],"newTerms":["false","prolog","buys","sells","proof","data","garden","apple","value"],"tooManyNewTerms":true}],"stats":{"sentences":3,"averageWords":7.3,"longest":9,"hardWords":15,"hardShare":68.2,"mostNewTerms":9},"ok":false,"problems":4}
+99. simplify("The commence teacher facilitates logic meditates algorithm false thinks.", "3")
+   => {"text":"The start teacher facilitates logic meditates algorithm false thinks.","changes":1}
+100. funnelStats("funnel_event(1372, checkout, 'u4@example.com').\nfunnel_event(1822, declined, 'u2@example.com').\nfunnel_event(1920, visit, []).\nfunnel_event(1967, visit, []).\nfunnel_event(2099, visit, []).\nfunnel_event(2544, visit, []).\nfunnel_event(2768, signup, ['U5', 'u3@example.com']).\nfunnel_event(3034, signup, ['U1', 'u2@example.com']).")
+   => {"visits":4,"signups":2,"checkouts":1,"declined":1,"signupRate":50,"checkoutRate":50,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+101. parseMoney("AUD 51,951.50 per day")
+   => 51951.5
+102. daysBetween("2025-01-20", "2024-02-25")
+   => -330
+103. addDays("2027-10-19", 391)
+   => "2028-11-13"
+104. document edits and undo("person", ["With music algorithm proof."], 1)
+   => {"title":"person","blocks":[]}
+105. textToProlog("Alice is happy. Carol is tall. Every teacher is kind.")
+   => "happy(alice).\ntall(carol).\nkind(X) :-\n    teacher(X)."
+106. convert("Alice is happy. Every student is busy.", "12")
+   => {"prolog":":- dynamic student/1.\nhappy(alice).\nbusy(X) :-\n    student(X).","text":"Alice is happy.\nEvery student is busy.","readable":"Alice is happy. Every student is busy.","proof":true,"answers":[]}
+107. sentences("Quickly with teacher tree data green finds and.")
+   => ["Quickly with teacher tree data green finds and."]
+108. plural("knife")
+   => "knives"
+109. singular("knife")
+   => "knife"
+110. wordRank("sheep")
+   => "Infinity"
+111. measure("Simple true list reads apple. Prolog simple person and algorithm false green idea. Teacher about with garden.", "6")
+   => {"level":{"id":"6","label":"Year 6","maxWords":16,"maxRank":1000,"maxNewTerms":3},"paragraphs":[{"sentences":[{"text":"Simple true list reads apple.","words":5,"hard":[],"tooLong":false,"tooHard":[],"reasons":[]},{"text":"Prolog simple person and algorithm false green idea.","words":8,"hard":["Prolog","algorithm","false"],"tooLong":false,"tooHard":["Prolog","algorithm","false"],"reasons":["hard for Year 6: Prolog, algorithm, false"]},{"text":"Teacher about with garden.","words":4,"hard":[],"tooLong":false,"tooHard":[],"reasons":[]}],"newTerms":["prolog","algorithm","false"],"tooManyNewTerms":false}],"stats":{"sentences":3,"averageWords":5.7,"longest":8,"hardWords":3,"hardShare":17.6,"mostNewTerms":3},"ok":false,"problems":1}
+112. simplify("The utilise tomato demonstrates sells student simple false.", "6")
+   => {"text":"The use tomato demonstrates sells student simple false.","changes":1}
+113. funnelStats("funnel_event(1025, visit, []).\nfunnel_event(1439, visit, []).\nfunnel_event(1661, checkout, 'u1@example.com').\nfunnel_event(1798, signup, ['U2', 'u2@example.com']).\nfunnel_event(1860, visit, []).")
+   => {"visits":3,"signups":1,"checkouts":1,"declined":0,"signupRate":33.3,"checkoutRate":100,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+114. parseMoney("about $13,481.05 per day")
+   => 13481.05
+115. daysBetween("2024-03-27", "2024-09-09")
+   => 166
+116. addDays("2027-04-17", 146)
+   => "2027-09-10"
+117. document edits and undo("algorithm", ["The garden proof algorithm cat simple.","Sells the false happy reads.","Blue teacher dog."], 1)
+   => {"title":"algorithm","blocks":["The garden proof algorithm cat simple.","Sells the false happy reads."]}
+118. textToProlog("Alice is tall. Dan is a teacher. Dan is a teacher. Every teacher is kind. Is bob happy?")
+   => "tall(alice).\nteacher(dan).\nteacher(dan).\nkind(X) :-\n    teacher(X)."
+119. convert("Carol is happy. Dan is a teacher. Bob is a student.", "3")
+   => {"prolog":"happy(carol).\nteacher(dan).\nstudent(bob).","text":"Carol is happy.\nDan is a teacher.\nBob is a student.","readable":"Carol is happy. Dan is a teacher. Bob is a student.","proof":true,"answers":[]}
+120. sentences("Happy cat runs.")
+   => ["Happy cat runs."]
+121. plural("city")
+   => "cities"
+122. singular("box")
+   => "box"
+123. wordRank("mouse")
+   => "Infinity"
+124. measure("Logic blue value tree house a about algorithm.", "pg")
+   => {"level":{"id":"pg","label":"Postgraduate","maxWords":35,"maxRank":"Infinity","maxNewTerms":12},"paragraphs":[{"sentences":[{"text":"Logic blue value tree house a about algorithm.","words":8,"hard":["Logic","algorithm"],"tooLong":false,"tooHard":[],"reasons":[]}],"newTerms":["logic","algorithm"],"tooManyNewTerms":false}],"stats":{"sentences":1,"averageWords":8,"longest":8,"hardWords":2,"hardShare":25,"mostNewTerms":2},"ok":true,"problems":0}
+125. simplify("The utilise idea demonstrates idea student cat algorithm person number.", "pg")
+   => {"text":"The use idea demonstrates idea student cat algorithm person number.","changes":1}
+126. funnelStats("funnel_event(1306, checkout, 'u5@example.com').\nfunnel_event(1434, visit, []).\nfunnel_event(1925, declined, 'u4@example.com').\nfunnel_event(2220, signup, ['U3', 'u4@example.com']).\nfunnel_event(2548, signup, ['U2', 'u3@example.com']).\nfunnel_event(3031, checkout, 'u5@example.com').\nfunnel_event(3358, visit, []).\nfunnel_event(3532, checkout, 'u1@example.com').\nfunnel_event(3618, visit, []).")
+   => {"visits":3,"signups":2,"checkouts":3,"declined":1,"signupRate":66.7,"checkoutRate":150,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+127. parseMoney("30,983.05 a month")
+   => 30983.05
+128. daysBetween("2025-04-14", "2025-04-16")
+   => 2
+129. addDays("2024-04-20", 197)
+   => "2024-11-03"
+130. document edits and undo("logic", ["Blue finds a data quickly number person writes."], 0)
+   => {"title":"logic","blocks":["Blue finds a data quickly number person writes."]}
+131. textToProlog("Bob is a student. Every student is happy. Is dan happy?")
+   => "student(bob).\nhappy(X) :-\n    student(X)."
+132. convert("Bob is a teacher. Bob is a teacher.", "12")
+   => {"prolog":"teacher(bob).\nteacher(bob).","text":"Bob is a teacher.\nBob is a teacher.","readable":"Bob is a teacher. Bob is a teacher.","proof":true,"answers":[]}
+133. sentences("Value reads prolog music reads meditates finds.")
+   => ["Value reads prolog music reads meditates finds."]
+134. plural("teacher")
+   => "teachers"
+135. singular("baby")
+   => "baby"
+136. wordRank("leaf")
+   => "Infinity"
+137. measure("False reads house house thinks and finds.", "3")
+   => {"level":{"id":"3","label":"Year 3","maxWords":12,"maxRank":550,"maxNewTerms":1},"paragraphs":[{"sentences":[{"text":"False reads house house thinks and finds.","words":7,"hard":["False"],"tooLong":false,"tooHard":["False"],"reasons":["hard for Year 3: False"]}],"newTerms":["false"],"tooManyNewTerms":false}],"stats":{"sentences":1,"averageWords":7,"longest":7,"hardWords":1,"hardShare":14.3,"mostNewTerms":1},"ok":false,"problems":1}
+138. simplify("The commence leaf facilitates meditates green prolog.", "1")
+   => {"text":"The start leaf facilitates meditates green prolog.","changes":1}
+139. funnelStats("funnel_event(1322, signup, ['U4', 'u3@example.com']).\nfunnel_event(1639, visit, []).\nfunnel_event(1711, visit, []).")
+   => {"visits":2,"signups":1,"checkouts":0,"declined":0,"signupRate":50,"checkoutRate":0,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+140. parseMoney("$65,274 a month")
+   => 65274
+141. daysBetween("2027-06-12", "2026-02-12")
+   => -485
+142. addDays("2027-12-17", 248)
+   => "2028-08-21"
+143. document edits and undo("teacher happy cat", ["Finds finds simple and false runs reads apple.","Music book false finds.","With apple tree value runs.","Runs meditates and sells with a writes true."], 2)
+   => {"title":"teacher happy cat","blocks":["Finds finds simple and false runs reads apple.","Music book false finds."]}
+144. textToProlog("Dan is a teacher. Every student is kind. Is alice happy?")
+   => "teacher(dan).\nkind(X) :-\n    student(X)."
+145. convert("Dan is a student. Carol is a student. Every teacher is busy.", "9")
+   => {"prolog":":- dynamic teacher/1.\nstudent(dan).\nstudent(carol).\nbusy(X) :-\n    teacher(X).","text":"Dan is a student.\nCarol is a student.\nEvery teacher is busy.","readable":"Dan is a student. Carol is a student. Every teacher is busy.","proof":true,"answers":[]}
+146. sentences("Meditates tree the cat idea happy teacher green tree.")
+   => ["Meditates tree the cat idea happy teacher green tree."]
+147. plural("apple")
+   => "apples"
+148. singular("mouse")
+   => "mouse"
+149. wordRank("box")
+   => 418
+150. measure("Runs about value sells. House green cat blue about finds. Blue number quickly house sells.", "3")
+   => {"level":{"id":"3","label":"Year 3","maxWords":12,"maxRank":550,"maxNewTerms":1},"paragraphs":[{"sentences":[{"text":"Runs about value sells.","words":4,"hard":["value","sells"],"tooLong":false,"tooHard":["value","sells"],"reasons":["hard for Year 3: value, sells"]},{"text":"House green cat blue about finds.","words":6,"hard":["cat"],"tooLong":false,"tooHard":["cat"],"reasons":["hard for Year 3: cat"]},{"text":"Blue number quickly house sells.","words":5,"hard":["sells"],"tooLong":false,"tooHard":["sells"],"reasons":["hard for Year 3: sells"]}],"newTerms":["value","sells","cat"],"tooManyNewTerms":true}],"stats":{"sentences":3,"averageWords":5,"longest":6,"hardWords":4,"hardShare":26.7,"mostNewTerms":3},"ok":false,"problems":4}
+151. simplify("The commence idea demonstrates finds true student.", "pg")
+   => {"text":"The start idea demonstrates finds true student.","changes":1}
+152. funnelStats("funnel_event(1103, signup, ['U3', 'u4@example.com']).\nfunnel_event(1345, visit, []).\nfunnel_event(1693, signup, ['U4', 'u5@example.com']).\nfunnel_event(2099, checkout, 'u1@example.com').\nfunnel_event(2231, checkout, 'u2@example.com').")
+   => {"visits":1,"signups":2,"checkouts":2,"declined":0,"signupRate":200,"checkoutRate":100,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+153. parseMoney("about $80,706")
+   => 80706
+154. daysBetween("2026-04-12", "2024-07-04")
+   => -647
+155. addDays("2024-02-08", 214)
+   => "2024-09-09"
+156. document edits and undo("person value book", ["Meditates teacher thinks runs data apple."], 1)
+   => {"title":"person value book","blocks":[]}
+157. textToProlog("Bob is tall. Carol is a student. Every student is busy.")
+   => "tall(bob).\nstudent(carol).\nbusy(X) :-\n    student(X)."
+158. convert("Dan is happy. Every student is busy. Is bob happy?", "6")
+   => {"prolog":":- dynamic student/1.\nhappy(dan).\nbusy(X) :-\n    student(X).","text":"Dan is happy.\nEvery student is busy.","readable":"Dan is happy. Every student is busy.","proof":true,"answers":[]}
+159. sentences("Sells person buys teacher number list. Data house sells list house happy writes proof. Data happy student true dog cat simple. Music prolog list green proof idea blue number writes.")
+   => ["Sells person buys teacher number list.","Data house sells list house happy writes proof.","Data happy student true dog cat simple.","Music prolog list green proof idea blue number writes."]
+160. plural("person")
+   => "people"
+161. singular("church")
+   => "church"
+162. wordRank("quickly")
+   => 437
+163. measure("Book person sells meditates and tree person.", "3")
+   => {"level":{"id":"3","label":"Year 3","maxWords":12,"maxRank":550,"maxNewTerms":1},"paragraphs":[{"sentences":[{"text":"Book person sells meditates and tree person.","words":7,"hard":["sells","meditates"],"tooLong":false,"tooHard":["sells","meditates"],"reasons":["hard for Year 3: sells, meditates"]}],"newTerms":["sells","meditates"],"tooManyNewTerms":true}],"stats":{"sentences":1,"averageWords":7,"longest":7,"hardWords":2,"hardShare":28.6,"mostNewTerms":2},"ok":false,"problems":2}
+164. simplify("The utilise teacher shows false garden.", "9")
+   => {"text":"The use teacher shows false garden.","changes":1}
+165. funnelStats("funnel_event(1394, visit, []).\nfunnel_event(1638, visit, []).\nfunnel_event(1670, signup, ['U3', 'u4@example.com']).\nfunnel_event(1860, declined, 'u4@example.com').\nfunnel_event(2136, declined, 'u4@example.com').\nfunnel_event(2319, declined, 'u3@example.com').\nfunnel_event(2732, visit, []).")
+   => {"visits":3,"signups":1,"checkouts":0,"declined":3,"signupRate":33.3,"checkoutRate":0,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+166. parseMoney("24,000.50 per day")
+   => 24000.5
+167. daysBetween("2026-09-20", "2026-04-15")
+   => -158
+168. addDays("2026-12-02", -25)
+   => "2026-11-07"
+169. document edits and undo("simple data", ["Value idea writes."], 0)
+   => {"title":"simple data","blocks":["Value idea writes."]}
+170. textToProlog("Dan is a student. Alice is tall. Every student is happy. Is dan happy?")
+   => "student(dan).\ntall(alice).\nhappy(X) :-\n    student(X)."
+171. convert("Alice is a student. Bob is tall. Every student is kind.", "12")
+   => {"prolog":"student(alice).\ntall(bob).\nkind(X) :-\n    student(X).","text":"Alice is a student.\nBob is tall.\nEvery student is kind.","readable":"Alice is a student. Bob is tall. Every student is kind.","proof":true,"answers":[]}
+172. sentences("Buys true value. And quickly about apple number happy writes. Buys logic house writes person cat meditates idea.")
+   => ["Buys true value.","And quickly about apple number happy writes.","Buys logic house writes person cat meditates idea."]
+173. plural("baby")
+   => "babies"
+174. singular("knife")
+   => "knife"
+175. wordRank("tomato")
+   => "Infinity"
+176. measure("And proof list runs. Teacher thinks idea true. Writes about proof a apple logic and quickly.", "pg")
+   => {"level":{"id":"pg","label":"Postgraduate","maxWords":35,"maxRank":"Infinity","maxNewTerms":12},"paragraphs":[{"sentences":[{"text":"And proof list runs.","words":4,"hard":["proof"],"tooLong":false,"tooHard":[],"reasons":[]},{"text":"Teacher thinks idea true.","words":4,"hard":[],"tooLong":false,"tooHard":[],"reasons":[]},{"text":"Writes about proof a apple logic and quickly.","words":8,"hard":["proof","logic"],"tooLong":false,"tooHard":[],"reasons":[]}],"newTerms":["proof","logic"],"tooManyNewTerms":false}],"stats":{"sentences":3,"averageWords":5.3,"longest":8,"hardWords":3,"hardShare":18.8,"mostNewTerms":2},"ok":true,"problems":0}
+177. simplify("The enormous tomato demonstrates true number music blue.", "12")
+   => {"text":"The enormous tomato demonstrates true number music blue.","changes":0}
+178. funnelStats("funnel_event(1044, signup, ['U3', 'u1@example.com']).\nfunnel_event(1446, visit, []).\nfunnel_event(1540, visit, []).\nfunnel_event(1752, signup, ['U3', 'u4@example.com']).\nfunnel_event(1902, signup, ['U2', 'u1@example.com']).")
+   => {"visits":2,"signups":3,"checkouts":0,"declined":0,"signupRate":150,"checkoutRate":0,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+179. parseMoney("$28,162 a month")
+   => 28162
+180. daysBetween("2027-03-16", "2026-12-27")
+   => -79
+181. addDays("2026-08-01", 274)
+   => "2027-05-02"
+182. document edits and undo("sells dog proof", ["A list meditates with number list value student."], 0)
+   => {"title":"sells dog proof","blocks":["A list meditates with number list value student."]}
+183. textToProlog("Bob is happy. Carol is happy. Every student is busy.")
+   => "happy(bob).\nhappy(carol).\nbusy(X) :-\n    student(X)."
+184. convert("Dan is happy. Alice is a teacher. Bob is a student. Every student is happy.", "3")
+   => {"prolog":"happy(dan).\nteacher(alice).\nstudent(bob).\nhappy(X) :-\n    student(X).","text":"Dan is happy.\nAlice is a teacher.\nBob is a student.\nEvery student is happy.","readable":"Dan is happy. Alice is a teacher. Bob is a student. Every student is happy.","proof":true,"answers":[]}
+185. sentences("Apple dog quickly happy runs the house apple. With logic proof teacher happy about proof. With house happy person book idea.")
+   => ["Apple dog quickly happy runs the house apple.","With logic proof teacher happy about proof.","With house happy person book idea."]
+186. plural("child")
+   => "children"
+187. singular("apple")
+   => "apple"
+188. wordRank("mouse")
+   => "Infinity"
+189. measure("Tree tree a teacher proof logic cat. True number book. Value apple number.", "12")
+   => {"level":{"id":"12","label":"Year 12","maxWords":25,"maxRank":"Infinity","maxNewTerms":7},"paragraphs":[{"sentences":[{"text":"Tree tree a teacher proof logic cat.","words":7,"hard":["proof","logic"],"tooLong":false,"tooHard":[],"reasons":[]},{"text":"True number book.","words":3,"hard":[],"tooLong":false,"tooHard":[],"reasons":[]},{"text":"Value apple number.","words":3,"hard":[],"tooLong":false,"tooHard":[],"reasons":[]}],"newTerms":["proof","logic"],"tooManyNewTerms":false}],"stats":{"sentences":3,"averageWords":4.3,"longest":7,"hardWords":2,"hardShare":15.4,"mostNewTerms":2},"ok":true,"problems":0}
+190. simplify("The commence tomato shows runs blue.", "9")
+   => {"text":"The start tomato shows runs blue.","changes":1}
+191. funnelStats("funnel_event(1082, visit, []).\nfunnel_event(1250, visit, []).\nfunnel_event(1500, visit, []).\nfunnel_event(1862, checkout, 'u5@example.com').\nfunnel_event(2101, signup, ['U2', 'u2@example.com']).")
+   => {"visits":3,"signups":1,"checkouts":1,"declined":0,"signupRate":33.3,"checkoutRate":100,"saleRate":0,"sales":0,"revenue":0,"unmatchedSales":0,"adSpend":0,"profit":0,"returnOnSpend":null,"costPerSignup":null}
+192. parseMoney("$59,888 per day")
+   => 59888
+193. daysBetween("2027-02-19", "2027-08-02")
+   => 164
+194. addDays("2026-04-06", 154)
+   => "2026-09-07"
+195. document edits and undo("quickly meditates teacher", ["Happy and quickly reads.","Number value runs about buys meditates happy and meditates."], 2)
+   => {"title":"quickly meditates teacher","blocks":[]}
+196. textToProlog("Dan is happy. Alice is a student. Every teacher is kind.")
+   => "happy(dan).\nstudent(alice).\nkind(X) :-\n    teacher(X)."
+197. convert("Dan is happy. Dan is happy. Every student is kind.", "1")
+   => {"prolog":":- dynamic student/1.\nhappy(dan).\nhappy(dan).\nkind(X) :-\n    student(X).","text":"Dan is happy.\nDan is happy.\nEvery student is kind.","readable":"Dan is happy. Dan is happy. Every student is kind.","proof":true,"answers":[]}
+198. sentences("Data idea true sells blue garden data apple. About garden happy false data with garden about.")
+   => ["Data idea true sells blue garden data apple.","About garden happy false data with garden about."]
+199. plural("person")
+   => "people"
+200. singular("box")
+   => "box"
