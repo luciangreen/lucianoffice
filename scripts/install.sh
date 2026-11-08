@@ -22,7 +22,7 @@ get() {  # get <folder> <repo>
 }
 
 # Lucian Office apps (they sit side by side in apps/)
-for app in lucianoffice writer counter presenter etcher tabler; do
+for app in lucianoffice writer counter presenter etcher tabler studio; do
   get "apps/$app" "$app"
 done
 
