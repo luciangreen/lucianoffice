@@ -41,7 +41,9 @@ From the `lucianos` folder:
 ```sh
 cd apps
 git clone https://github.com/luciangreen/lucianoffice   # the core: Converter, year level, documents, commands, plug-ins
-git clone https://github.com/luciangreen/writer         # word processor, GL Inspire, Chatbot App Authorer
+git clone https://github.com/luciangreen/writer         # word processor
+git clone https://github.com/luciangreen/glinspire      # GL Inspire (a Writer plug-in; also opens on its own)
+git clone https://github.com/luciangreen/chatbotappauthor  # Chatbot App Authorer (a Writer plug-in; also opens on its own)
 git clone https://github.com/luciangreen/counter        # spreadsheet, proformas, segment graphs
 git clone https://github.com/luciangreen/presenter      # slide decks (uses counter for workbooks)
 git clone https://github.com/luciangreen/etcher         # drawings, flowcharts, filters
