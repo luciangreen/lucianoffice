@@ -21,6 +21,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: luciangreen/tabler
+          ref: main
           path: tabler
       - name: Check out vetusiapl2webpl (turns the funnel into a web server)
         uses: actions/checkout@v4
