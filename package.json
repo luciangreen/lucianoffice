@@ -7,7 +7,8 @@
   "scripts": {
     "test": "node --test test/*.test.js",
     "check-prolog": "node scripts/check-prolog.mjs",
-    "check-coach": "node scripts/check-coach.mjs"
+    "check-coach": "node scripts/check-coach.mjs",
+    "ios": "node io/make-ios.mjs"
   },
   "license": "BSD-3-Clause"
 }
