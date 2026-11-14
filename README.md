@@ -51,6 +51,7 @@ git clone https://github.com/luciangreen/tabler         # Prolog database websit
 git clone https://github.com/luciangreen/studio         # Sound Sequencer MR
 git clone https://github.com/luciangreen/moviemr        # Movie MR: video boards in 3D, made into one MP4
 git clone https://github.com/luciangreen/visualstarlog  # presentations written in Prolog with Starlog
+git clone https://github.com/luciangreen/mnnaction      # MNN in Action: mnns's algorithms animated step by step
 cd ..
 ```
 
@@ -63,13 +64,15 @@ Clone these beside `lucianos` (in the same folder as your other repos, such as `
 ```sh
 cd ..                                                   # the folder that holds lucianos
 git clone https://github.com/luciangreen/mnns            # Optimise with mnns (Lucian Office, fastos)
+git clone https://github.com/luciangreen/S2A2            # S2A2, for mnns's S2A2 bridge (MNN in Action)
 git clone https://github.com/luciangreen/vetusiapl2webpl # turns funnels into web servers (Tabler)
 git clone https://github.com/luciangreen/Starlog         # the syntax Visual Starlog presentations are written in
 ```
 
 | Used by | Repos (beside lucianos) | What for |
 | --- | --- | --- |
-| Lucian Office, fastos | `mnns` | Optimise with mnns |
+| Lucian Office, fastos, MNN in Action | `mnns` | Optimise with mnns; the algorithms MNN in Action shows |
+| MNN in Action | `S2A2` | The S2A2 bridge (set its folder in MNN in Action's Settings) |
 | Tabler funnels | `vetusiapl2webpl` | Converting funnels to web servers |
 | Visual Starlog | `Starlog` | Running presentations written in Starlog (set its folder in Visual Starlog's Settings) |
 | Writer (GL Inspire) | `Algorithm-Writer-with-Lists`, `Text-to-Breasonings`, `listprologinterpreter`, `Philosophy`, `Languages`, `List-Prolog-to-Prolog-Converter`, `Prolog-to-List-Prolog`, `SSI`, `culturaltranslationtool` | Grammar Logic. Install these with [Time Machine](https://github.com/luciangreen/Time_Machine), as the LucianOS README says. GL Inspire still works without them, from your bio and recent texts. |
@@ -88,7 +91,7 @@ sh apps/lucianoffice/scripts/install.sh
 npm start
 ```
 
-Open http://localhost:4170/. The apps are in the Apps menu, and each also opens at its own address: http://localhost:4170/apps/lucianoffice/, /apps/writer/, /apps/counter/, /apps/presenter/, /apps/etcher/, /apps/tabler/, /apps/studio/, /apps/moviemr/ and /apps/visualstarlog/. The business coach is at /apps/lucianoffice/coach.html.
+Open http://localhost:4170/. The apps are in the Apps menu, and each also opens at its own address: http://localhost:4170/apps/lucianoffice/, /apps/writer/, /apps/counter/, /apps/presenter/, /apps/etcher/, /apps/tabler/, /apps/studio/, /apps/moviemr/, /apps/visualstarlog/ and /apps/mnnaction/. The business coach is at /apps/lucianoffice/coach.html.
 
 To use the apps on an iPhone, follow [remote mode](https://github.com/luciangreen/lucianos#remote-mode-iphone-through-tailscale) in the LucianOS README.
 
