@@ -22,12 +22,13 @@ get() {  # get <folder> <repo>
 }
 
 # Lucian Office apps (they sit side by side in apps/)
-for app in lucianoffice writer glinspire chatbotappauthor counter presenter etcher tabler studio moviemr visualstarlog; do
+for app in lucianoffice writer glinspire chatbotappauthor counter presenter etcher tabler studio moviemr visualstarlog mnnaction; do
   get "apps/$app" "$app"
 done
 
 # Tools the apps run as Prolog jobs (beside lucianos, like your other repos)
 get "$TOOLS/mnns" mnns                         # Optimise with mnns (Lucian Office, fastos)
+get "$TOOLS/S2A2" S2A2                         # S2A2, for mnns's S2A2 bridge (MNN in Action)
 get "$TOOLS/vetusiapl2webpl" vetusiapl2webpl   # funnels (Tabler)
 get "$TOOLS/Starlog" Starlog                   # presentations (Visual Starlog)
 
