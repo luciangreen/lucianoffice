@@ -20,8 +20,8 @@ not_installed("Lucian Office isn't in lucianos/apps, so there's nothing to updat
 about("Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)").
 
 % JavaScript's Boolean(x) for JSON values (a missing key is undefined, which is false).
-truthy(X, false) :- ( X == false ; X == null ; X == "" ; X == 0 ; X == 0.0 ), !.
-truthy(_, true).
+truthy(X, V) :- ( falsy(X) -> V0 = false ; V0 = true ), V = V0.   % steadfast: truthy(null, true) fails
+falsy(X) :- ( X == false ; X == null ; X == "" ; X == 0 ; X == 0.0 ), !.
 key(D, K, V) :- ( is_dict(D), get_dict(K, D, V0) -> V = V0 ; V = null ).
 
 % ------------------------------------------------------------------ the definitions
@@ -87,6 +87,10 @@ status(S) :- json_value(O), json_value(I), member(Ks, [[office-O, officeInstalle
 status(S) :- json_value(F), dict_pairs(S, _, [failed-F, office-true, officeInstalled-true]).
 
 iff(A, B) :- ( call(A) -> call(B) ; \+ call(B) ).
+
+% 0. Truth is a function: every value is exactly one of true or false, whichever way it's asked.
+theorem(truthy_is_steadfast) :-
+    forall(json_value(X), ( findall(V, truthy(X, V), [V1]), b(V1), forall(b(W), iff(truthy(X, W), W == V1)) )).
 
 % 1. The box always has exactly one view.
 theorem(box_view_is_a_function) :-
