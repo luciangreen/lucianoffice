@@ -325,6 +325,30 @@ async function open(path) {
   }
 }
 
+// ------------------------------------------------------------------ self-updating
+// The box is LucianOS's "Keep Lucian Office up to date" (Tools ▸ Updates), so both show the same.
+async function selfUpdating() {
+  const box = $('selfUpdate');
+  const show = (s) => { box.checked = s.office; box.disabled = !s.officeInstalled; };
+  try {
+    show(await api.updates.get());
+  } catch {
+    box.disabled = true;
+    box.parentElement.title = 'Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating.';
+    return;
+  }
+  box.onchange = async () => {
+    try {
+      const s = await api.updates.set({ office: box.checked });
+      show(s);
+      status(box.checked ? `Self-updating is on: Lucian Office is checked every ${s.everyHours} hours.` : 'Self-updating is off.', 'ok');
+    } catch (err) {
+      status(err.message, 'error');
+      box.checked = !box.checked;
+    }
+  };
+}
+
 // ------------------------------------------------------------------ start
 const params0 = new URLSearchParams(location.search);
 async function init() {
@@ -340,6 +364,7 @@ async function init() {
   $('optimise').onclick = optimise;
   $('save').onclick = save;
   $('open').onclick = () => open();
+  selfUpdating();
   $('year').onchange = () => { settings.yearLevel = $('year').value; persist(); if (result) run(); };
   $('opinion').onchange = () => change([{ op: 'opinion', value: $('opinion').value }], 'user', 'wrote the Opinion');
   $('addData').onclick = () => { const k = prompt('Name (for example "tall")'); if (k) { change([{ op: 'data', key: k.trim().toLowerCase(), value: '' }], 'user', `added Data: ${k}`); renderData(); } };

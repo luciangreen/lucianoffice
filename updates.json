@@ -1,0 +1,5 @@
+{
+  "about": "What LucianOS's 'Keep Lucian Office up to date' box updates (git pull --ff-only). apps sit in lucianos/apps; tools sit beside lucianos. Keep in step with scripts/install.sh.",
+  "apps": ["lucianoffice", "writer", "glinspire", "chatbotappauthor", "counter", "presenter", "etcher", "tabler", "studio", "moviemr", "visualstarlog", "mnnaction"],
+  "tools": ["mnns", "S2A2", "vetusiapl2webpl", "Starlog"]
+}
