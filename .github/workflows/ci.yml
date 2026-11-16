@@ -38,6 +38,9 @@ jobs:
       - name: Unit tests
         working-directory: lucianoffice
         run: npm test
+      - name: Proofs (self-updating) and the 200 examples against the Prolog spec
+        working-directory: lucianoffice
+        run: npm run proofs
       - name: Converter against SWI-Prolog and mnns
         working-directory: lucianoffice
         env:

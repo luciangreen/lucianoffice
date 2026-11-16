@@ -113,7 +113,9 @@ Run `sh apps/lucianoffice/scripts/install.sh` again, or `git pull` in each app's
   - Formats: Writer, Counter, Presenter, Etcher and Tabler.
   - Changes: the history, with undo.
 - **Save** writes `Name.office.json` and its Prolog form, `Name.office.pl`. **Open** reads a saved document back.
-- **Self-updating** (optional, off until you tick it): LucianOS pulls Lucian Office's apps and tools from GitHub soon after it starts and every 6 hours, with `git pull --ff-only`, so a repo with changes or commits of your own is left alone. It is the same box as **Keep Lucian Office up to date** in LucianOS's **Tools ▸ Updates**, where you can also check now and see what changed. What it updates is listed in `updates.json` (the same list as `scripts/install.sh`; a test keeps them in step). It needs a LucianOS new enough to have Tools ▸ Updates.
+- **Self-updating** (optional, off until you tick it): LucianOS pulls Lucian Office's apps and tools from GitHub soon after it starts and every 6 hours, with `git pull --ff-only`, so a repo with changes or commits of your own is left alone. It is the same box as **Keep Lucian Office up to date** in LucianOS's **Tools ▸ Updates**, where you can also check now and see what changed. What it updates is listed in `updates.json` (the same list as `scripts/install.sh`; a test keeps them in step). The box's decisions are in `lib/self-update.js`:
+  - `proofs/self_update.pl` states them in Prolog and proves 7 theorems by exhaustion, for example that the box never shows self-updating as on when LucianOS can't say, and that `updates.json` agrees with `install.sh` exactly when the lists are equal.
+  - `io/self-update.txt` holds 200 recorded inputs and outputs, and `proofs/self_update_ios.pl` checks that the Prolog spec gives all of them (`npm run proofs`). It needs a LucianOS new enough to have Tools ▸ Updates.
 
 ## The Converter
 
@@ -263,6 +265,7 @@ Every step has a check-in question, your notes, tasks you can tick, add and remo
 npm test               # unit tests (Node 20+, no dependencies)
 npm run check-prolog   # needs swipl; set MNNS_DIR to an mnns checkout to include optimising
 npm run check-coach -- funnel_events.pl   # the coach's figures against a funnel's records
+npm run proofs         # needs swipl: self-updating's theorems, and its 200 examples against the Prolog spec
 ```
 
 `check-prolog` converts every sample text in `test/fixtures` and checks four things:

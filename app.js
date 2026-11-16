@@ -2,6 +2,7 @@
 // answer the follow-up questions, and see the Prolog, the proof, the readable text at your
 // year level, and the first version in each app's format.
 import { api } from '/shared/api.js';
+import { boxView, toggleMessage } from './lib/self-update.js';
 
 // LucianOS opens the business coach as /apps/lucianoffice/?coach=<step> (from its checklist).
 if (new URLSearchParams(location.search).has('coach')) location.replace(`coach.html${location.search}`);
@@ -327,21 +328,21 @@ async function open(path) {
 
 // ------------------------------------------------------------------ self-updating
 // The box is LucianOS's "Keep Lucian Office up to date" (Tools ▸ Updates), so both show the same.
+// Its decisions are in lib/self-update.js, proved in proofs/self_update.pl.
 async function selfUpdating() {
   const box = $('selfUpdate');
-  const show = (s) => { box.checked = s.office; box.disabled = !s.officeInstalled; };
+  const show = (s) => { const v = boxView(s); box.checked = v.checked; box.disabled = v.disabled; box.parentElement.title = v.title; };
+  if (!api.updates) return show({ failed: true });
   try {
     show(await api.updates.get());
   } catch {
-    box.disabled = true;
-    box.parentElement.title = 'Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating.';
-    return;
+    return show({ failed: true });
   }
   box.onchange = async () => {
     try {
       const s = await api.updates.set({ office: box.checked });
       show(s);
-      status(box.checked ? `Self-updating is on: Lucian Office is checked every ${s.everyHours} hours.` : 'Self-updating is off.', 'ok');
+      status(toggleMessage(s.office, s.everyHours), 'ok');
     } catch (err) {
       status(err.message, 'error');
       box.checked = !box.checked;

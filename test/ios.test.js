@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { makeIos, toText } from '../io/engine.mjs';
 import { cases, title } from '../io/cases.mjs';
+import * as su from '../io/self-update-cases.mjs';
 
 const read = (f) => fs.readFileSync(fileURLToPath(new URL(`../io/${f}`, import.meta.url)), 'utf8');
 
@@ -15,4 +16,12 @@ test('the 200 recorded inputs give the same outputs', async () => {
   const now = await makeIos(cases);
   for (let i = 0; i < saved.length; i++) assert.deepEqual(now[i], saved[i], `example ${i + 1} (${saved[i].name}) changed`);
   assert.equal(read('ios.txt'), toText(now, title));
+});
+
+test('the 200 recorded self-updating inputs give the same outputs', async () => {
+  const saved = read('self-update.jsonl').trim().split('\n').map((l) => JSON.parse(l));
+  assert.equal(saved.length, 200);
+  const now = await makeIos(su.cases);
+  for (let i = 0; i < saved.length; i++) assert.deepEqual(now[i], saved[i], `self-updating example ${i + 1} (${saved[i].name}) changed`);
+  assert.equal(read('self-update.txt'), toText(now, su.title));
 });
