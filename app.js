@@ -2,6 +2,7 @@
 // answer the follow-up questions, and see the Prolog, the proof, the readable text at your
 // year level, and the first version in each app's format.
 import { api } from '/shared/api.js';
+import { boxView, toggleMessage } from './lib/self-update.js';
 
 // LucianOS opens the business coach as /apps/lucianoffice/?coach=<step> (from its checklist).
 if (new URLSearchParams(location.search).has('coach')) location.replace(`coach.html${location.search}`);
@@ -325,6 +326,30 @@ async function open(path) {
   }
 }
 
+// ------------------------------------------------------------------ self-updating
+// The box is LucianOS's "Keep Lucian Office up to date" (Tools ▸ Updates), so both show the same.
+// Its decisions are in lib/self-update.js, proved in proofs/self_update.pl.
+async function selfUpdating() {
+  const box = $('selfUpdate');
+  const show = (s) => { const v = boxView(s); box.checked = v.checked; box.disabled = v.disabled; box.parentElement.title = v.title; };
+  if (!api.updates) return show({ failed: true });
+  try {
+    show(await api.updates.get());
+  } catch {
+    return show({ failed: true });
+  }
+  box.onchange = async () => {
+    try {
+      const s = await api.updates.set({ office: box.checked });
+      show(s);
+      status(toggleMessage(s.office, s.everyHours), 'ok');
+    } catch (err) {
+      status(err.message, 'error');
+      box.checked = !box.checked;
+    }
+  };
+}
+
 // ------------------------------------------------------------------ start
 const params0 = new URLSearchParams(location.search);
 async function init() {
@@ -340,6 +365,7 @@ async function init() {
   $('optimise').onclick = optimise;
   $('save').onclick = save;
   $('open').onclick = () => open();
+  selfUpdating();
   $('year').onchange = () => { settings.yearLevel = $('year').value; persist(); if (result) run(); };
   $('opinion').onchange = () => change([{ op: 'opinion', value: $('opinion').value }], 'user', 'wrote the Opinion');
   $('addData').onclick = () => { const k = prompt('Name (for example "tall")'); if (k) { change([{ op: 'data', key: k.trim().toLowerCase(), value: '' }], 'user', `added Data: ${k}`); renderData(); } };

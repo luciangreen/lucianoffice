@@ -1,0 +1,402 @@
+Lucian Office self-updating: 200 inputs and outputs, from real runs (npm run ios writes this file; npm test checks it).
+
+1. boxView({"office":0,"officeInstalled":true})
+   => {"checked":false,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+2. toggleMessage(false, 24)
+   => "Self-updating is off."
+3. installList("#!/bin/sh\nset -e\nfor app in presenter mnnaction; do\n  get \"apps/$app\" \"$app\"\ndone")
+   => {"apps":["presenter","mnnaction"],"tools":[]}
+4. listsAgree({"apps":[],"tools":["Starlog"]}, {"apps":[],"tools":["Starlog"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+5. boxView({"failed":true})
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+6. toggleMessage(1, 12)
+   => "Self-updating is on: Lucian Office is checked every 12 hours."
+7. installList("#!/bin/sh\nset -e\nfor app in writer  studio  presenter; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/mnns\" mnns   # a tool\nget \"$TOOLS/Starlog\" Starlog\necho \"Done.\"")
+   => {"apps":["writer","studio","presenter"],"tools":["mnns","Starlog"]}
+8. listsAgree({"apps":[],"tools":["Starlog","mnns"]}, {"apps":[],"tools":["Starlog","mnns"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+9. boxView({"office":1,"officeInstalled":true})
+   => {"checked":true,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+10. toggleMessage(0, "6")
+   => "Self-updating is off."
+11. installList("#!/bin/sh\nset -e\necho \"Done.\"")
+   => {"apps":[],"tools":[]}
+12. listsAgree({"apps":["etcher","mnnaction","studio","writer"],"tools":["Starlog","mnns"]}, {"apps":["etcher","mnnaction","studio","writer"],"tools":["Starlog","mnns"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+13. boxView({})
+   => {"checked":false,"disabled":true,"title":"Lucian Office isn't in lucianos/apps, so there's nothing to update."}
+14. toggleMessage(null, 1)
+   => "Self-updating is off."
+15. installList("#!/bin/sh\nset -e\nfor app in   moviemr glinspire writer counter; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/S2A2\" S2A2\nget \"$TOOLS/mnns\" mnns   # a tool\n  get \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl")
+   => {"apps":["moviemr","glinspire","writer","counter"],"tools":["S2A2","mnns"]}
+16. listsAgree({"apps":["lucianoffice","glinspire","studio"],"tools":[]}, {"apps":["glinspire","studio"],"tools":["Starlog"]})
+   => {"ok":false,"missingApps":[],"extraApps":["lucianoffice"],"missingTools":["Starlog"],"extraTools":[]}
+17. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+18. toggleMessage(true, 6)
+   => "Self-updating is on: Lucian Office is checked every 6 hours."
+19. installList("#!/bin/sh\nset -e\nfor app in glinspire  moviemr  counter; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/Starlog\" Starlog\n# get \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl   # a tool\necho \"Done.\"")
+   => {"apps":["glinspire","moviemr","counter"],"tools":["Starlog"]}
+20. listsAgree({"apps":["lucianoffice"],"tools":[]}, {"apps":["lucianoffice"],"tools":[]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+21. boxView({})
+   => {"checked":false,"disabled":true,"title":"Lucian Office isn't in lucianos/apps, so there's nothing to update."}
+22. toggleMessage(null, 24)
+   => "Self-updating is off."
+23. installList("#!/bin/sh\nset -e\nfor app in   glinspire  etcher; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/Starlog\" Starlog\n# get \"$TOOLS/mnns\" mnns   # a tool")
+   => {"apps":["glinspire","etcher"],"tools":["Starlog"]}
+24. listsAgree({"apps":["tabler"],"tools":[]}, {"apps":["tabler"],"tools":[]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+25. boxView({"failed":true})
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+26. toggleMessage(1, 6)
+   => "Self-updating is on: Lucian Office is checked every 6 hours."
+27. installList("#!/bin/sh\nset -e\nfor app in   mnnaction lucianoffice writer ; do\n  get \"apps/$app\" \"$app\"\ndone")
+   => {"apps":["mnnaction","lucianoffice","writer"],"tools":[]}
+28. listsAgree({"apps":["glinspire","lucianoffice","mnnaction"],"tools":["mnns","Starlog"]}, {"apps":["glinspire","lucianoffice","mnnaction"],"tools":["mnns","Starlog"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+29. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+30. toggleMessage(true, 24)
+   => "Self-updating is on: Lucian Office is checked every 24 hours."
+31. installList("#!/bin/sh\nset -e\nfor app in writer; do\n  get \"apps/$app\" \"$app\"\ndone\n  get \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl   # a tool\n  get \"$TOOLS/mnns\" mnns   # a tool")
+   => {"apps":["writer"],"tools":[]}
+32. listsAgree({"apps":["lucianoffice","moviemr","mnnaction"],"tools":["vetusiapl2webpl"]}, {"apps":["lucianoffice","moviemr","mnnaction"],"tools":["vetusiapl2webpl","S2A2"]})
+   => {"ok":false,"missingApps":[],"extraApps":[],"missingTools":["S2A2"],"extraTools":[]}
+33. boxView({"office":null,"officeInstalled":1,"everyHours":24})
+   => {"checked":false,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+34. toggleMessage(true, 6)
+   => "Self-updating is on: Lucian Office is checked every 6 hours."
+35. installList("#!/bin/sh\nset -e\nfor app in   glinspire moviemr studio lucianoffice ; do\n  get \"apps/$app\" \"$app\"\ndone")
+   => {"apps":["glinspire","moviemr","studio","lucianoffice"],"tools":[]}
+36. listsAgree({"apps":["mnnaction"],"tools":["vetusiapl2webpl","S2A2"]}, {"apps":["mnnaction"],"tools":["vetusiapl2webpl","S2A2"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+37. boxView({})
+   => {"checked":false,"disabled":true,"title":"Lucian Office isn't in lucianos/apps, so there's nothing to update."}
+38. toggleMessage(true, 2)
+   => "Self-updating is on: Lucian Office is checked every 2 hours."
+39. installList("#!/bin/sh\nset -e\nfor app in   glinspire lucianoffice presenter counter mnnaction ; do\n  get \"apps/$app\" \"$app\"\ndone\n# get \"$TOOLS/S2A2\" S2A2\n  get \"$TOOLS/mnns\" mnns   # a tool")
+   => {"apps":["glinspire","lucianoffice","presenter","counter","mnnaction"],"tools":[]}
+40. listsAgree({"apps":["tabler"],"tools":["Starlog"]}, {"apps":["presenter","tabler"],"tools":["Starlog"]})
+   => {"ok":false,"missingApps":["presenter"],"extraApps":[],"missingTools":[],"extraTools":[]}
+41. boxView({"office":null,"officeInstalled":1,"everyHours":6})
+   => {"checked":false,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+42. toggleMessage(1, 168)
+   => "Self-updating is on: Lucian Office is checked every 168 hours."
+43. installList("#!/bin/sh\nset -e")
+   => {"apps":[],"tools":[]}
+44. listsAgree(null, {"apps":["counter"],"tools":["mnns"]})
+   => {"ok":false,"missingApps":["counter"],"extraApps":[],"missingTools":["mnns"],"extraTools":[]}
+45. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+46. toggleMessage(1, 168)
+   => "Self-updating is on: Lucian Office is checked every 168 hours."
+47. installList("#!/bin/sh\nset -e\nfor app in   presenter writer ; do\n  get \"apps/$app\" \"$app\"\ndone\n  get \"$TOOLS/S2A2\" S2A2   # a tool\n# get \"$TOOLS/Starlog\" Starlog")
+   => {"apps":["presenter","writer"],"tools":[]}
+48. listsAgree({}, {"apps":[],"tools":["mnns"]})
+   => {"ok":false,"missingApps":[],"extraApps":[],"missingTools":["mnns"],"extraTools":[]}
+49. boxView({"office":0,"officeInstalled":true})
+   => {"checked":false,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+50. toggleMessage(null, 2)
+   => "Self-updating is off."
+51. installList("#!/bin/sh\nset -e\nfor app in etcher  counter  mnnaction; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl\nget \"$TOOLS/S2A2\" S2A2")
+   => {"apps":["etcher","counter","mnnaction"],"tools":["vetusiapl2webpl","S2A2"]}
+52. listsAgree({"apps":[],"tools":["S2A2"]}, {"apps":["writer"],"tools":["S2A2"]})
+   => {"ok":false,"missingApps":["writer"],"extraApps":[],"missingTools":[],"extraTools":[]}
+53. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+54. toggleMessage(true, 6)
+   => "Self-updating is on: Lucian Office is checked every 6 hours."
+55. installList("#!/bin/sh\nset -e\nfor app in mnnaction  counter  tabler ; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/S2A2\" S2A2")
+   => {"apps":["mnnaction","counter","tabler"],"tools":["S2A2"]}
+56. listsAgree({"apps":[],"tools":["Starlog"]}, {"apps":[],"tools":["Starlog"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+57. boxView({"office":false,"officeInstalled":true})
+   => {"checked":false,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+58. toggleMessage(0, 6)
+   => "Self-updating is off."
+59. installList("#!/bin/sh\nset -e\nfor app in   moviemr  tabler  writer  lucianoffice ; do\n  get \"apps/$app\" \"$app\"\ndone")
+   => {"apps":["moviemr","tabler","writer","lucianoffice"],"tools":[]}
+60. listsAgree({"apps":["tabler"],"tools":["Starlog","mnns"]}, {"apps":["tabler"],"tools":["Starlog","mnns"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+61. boxView({"office":false,"officeInstalled":true})
+   => {"checked":false,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+62. toggleMessage(null, 168)
+   => "Self-updating is off."
+63. installList("#!/bin/sh\nset -e\nget \"$TOOLS/S2A2\" S2A2   # a tool")
+   => {"apps":[],"tools":["S2A2"]}
+64. listsAgree({"apps":["studio"],"tools":["Starlog","mnns"]}, {"apps":["studio"],"tools":["Starlog","mnns"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+65. boxView({"failed":true})
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+66. toggleMessage(1, "6")
+   => "Self-updating is on: Lucian Office is checked every 6 hours."
+67. installList("#!/bin/sh\nset -e\nfor app in lucianoffice  counter  glinspire  writer; do\n  get \"apps/$app\" \"$app\"\ndone\n  get \"$TOOLS/mnns\" mnns\necho \"Done.\"")
+   => {"apps":["lucianoffice","counter","glinspire","writer"],"tools":[]}
+68. listsAgree({"apps":["etcher","mnnaction","counter"],"tools":["S2A2"]}, {"apps":["etcher","mnnaction","moviemr"],"tools":["S2A2"]})
+   => {"ok":false,"missingApps":["moviemr"],"extraApps":["counter"],"missingTools":[],"extraTools":[]}
+69. boxView({"office":0,"officeInstalled":true})
+   => {"checked":false,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+70. toggleMessage(null, 6)
+   => "Self-updating is off."
+71. installList("#!/bin/sh\nset -e\nfor app in   moviemr ; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/mnns\" mnns   # a tool")
+   => {"apps":["moviemr"],"tools":["mnns"]}
+72. listsAgree({"apps":"writer"}, {"apps":[],"tools":[]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+73. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+74. toggleMessage(1, 24)
+   => "Self-updating is on: Lucian Office is checked every 24 hours."
+75. installList("#!/bin/sh\nset -e\nfor app in   mnnaction lucianoffice tabler ; do\n  get \"apps/$app\" \"$app\"\ndone\n# get \"$TOOLS/mnns\" mnns")
+   => {"apps":["mnnaction","lucianoffice","tabler"],"tools":[]}
+76. listsAgree({"apps":["moviemr","writer","studio","lucianoffice"],"tools":["S2A2","mnns"]}, {"apps":["moviemr","writer","studio","lucianoffice"],"tools":["S2A2","mnns"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+77. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+78. toggleMessage(null, 2)
+   => "Self-updating is off."
+79. installList("#!/bin/sh\nset -e\nfor app in   lucianoffice tabler ; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/Starlog\" Starlog\nget \"$TOOLS/mnns\" mnns")
+   => {"apps":["lucianoffice","tabler"],"tools":["Starlog","mnns"]}
+80. listsAgree({"apps":["presenter","counter","glinspire"],"tools":["vetusiapl2webpl"]}, {"apps":["glinspire","counter","presenter"],"tools":["vetusiapl2webpl"]})
+   => {"ok":false,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+81. boxView({"failed":true})
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+82. toggleMessage(0, 168)
+   => "Self-updating is off."
+83. installList("#!/bin/sh\nset -e\nfor app in writer mnnaction lucianoffice presenter; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/mnns\" mnns\n  get \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl\necho \"Done.\"")
+   => {"apps":["writer","mnnaction","lucianoffice","presenter"],"tools":["mnns"]}
+84. listsAgree({"apps":["tabler"],"tools":["vetusiapl2webpl","S2A2","Starlog"]}, {"apps":["tabler"],"tools":["S2A2","Starlog"]})
+   => {"ok":false,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":["vetusiapl2webpl"]}
+85. boxView({"failed":true})
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+86. toggleMessage(null, 24)
+   => "Self-updating is off."
+87. installList("#!/bin/sh\nset -e\nfor app in   tabler\tmnnaction\tstudio\tcounter ; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/Starlog\" Starlog   # a tool\nget \"$TOOLS/S2A2\" S2A2\necho \"Done.\"")
+   => {"apps":["tabler","mnnaction","studio","counter"],"tools":["Starlog","S2A2"]}
+88. listsAgree({"apps":"writer"}, {"apps":["presenter","glinspire"],"tools":["Starlog","vetusiapl2webpl"]})
+   => {"ok":false,"missingApps":["presenter","glinspire"],"extraApps":[],"missingTools":["Starlog","vetusiapl2webpl"],"extraTools":[]}
+89. boxView({"office":1,"officeInstalled":true})
+   => {"checked":true,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+90. toggleMessage(1, "6")
+   => "Self-updating is on: Lucian Office is checked every 6 hours."
+91. installList("#!/bin/sh\nset -e\nfor app in   tabler lucianoffice presenter mnnaction ; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl\nget \"$TOOLS/mnns\" mnns\necho \"Done.\"")
+   => {"apps":["tabler","lucianoffice","presenter","mnnaction"],"tools":["vetusiapl2webpl","mnns"]}
+92. listsAgree({"apps":["lucianoffice","tabler"],"tools":[]}, {"apps":["lucianoffice","tabler"],"tools":[]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+93. boxView({"failed":true})
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+94. toggleMessage(false, 24)
+   => "Self-updating is off."
+95. installList("#!/bin/sh\nset -e\nfor app in presenter writer; do\n  get \"apps/$app\" \"$app\"\ndone\n  get \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl\necho \"Done.\"")
+   => {"apps":["presenter","writer"],"tools":[]}
+96. listsAgree({"apps":["lucianoffice","moviemr"],"tools":[]}, {"apps":["lucianoffice","moviemr","writer"],"tools":[]})
+   => {"ok":false,"missingApps":["writer"],"extraApps":[],"missingTools":[],"extraTools":[]}
+97. boxView({"office":false,"officeInstalled":false,"everyHours":1})
+   => {"checked":false,"disabled":true,"title":"Lucian Office isn't in lucianos/apps, so there's nothing to update."}
+98. toggleMessage(true, 2)
+   => "Self-updating is on: Lucian Office is checked every 2 hours."
+99. installList("#!/bin/sh\nset -e\nfor app in presenter  counter  tabler  studio; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/Starlog\" Starlog\n# get \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl   # a tool")
+   => {"apps":["presenter","counter","tabler","studio"],"tools":["Starlog"]}
+100. listsAgree({"apps":["lucianoffice","presenter","moviemr","mnnaction"],"tools":[]}, {"apps":["lucianoffice","presenter","moviemr","mnnaction"],"tools":[]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+101. boxView({"office":false,"officeInstalled":true,"everyHours":6})
+   => {"checked":false,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+102. toggleMessage(1, 12)
+   => "Self-updating is on: Lucian Office is checked every 12 hours."
+103. installList("#!/bin/sh\nset -e\nfor app in mnnaction\tglinspire\tpresenter ; do\n  get \"apps/$app\" \"$app\"\ndone\n  get \"$TOOLS/S2A2\" S2A2   # a tool\nget \"$TOOLS/Starlog\" Starlog")
+   => {"apps":["mnnaction","glinspire","presenter"],"tools":["Starlog"]}
+104. listsAgree({"apps":["tabler","counter"],"tools":["mnns","vetusiapl2webpl","mnns"]}, {"apps":["tabler","counter","moviemr"],"tools":["mnns","vetusiapl2webpl"]})
+   => {"ok":false,"missingApps":["moviemr"],"extraApps":[],"missingTools":[],"extraTools":[]}
+105. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+106. toggleMessage(null, 12)
+   => "Self-updating is off."
+107. installList("#!/bin/sh\nset -e\nfor app in   studio ; do\n  get \"apps/$app\" \"$app\"\ndone")
+   => {"apps":["studio"],"tools":[]}
+108. listsAgree({"apps":["counter","writer"],"tools":["Starlog"]}, {"apps":["counter","writer"],"tools":["Starlog"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+109. boxView({})
+   => {"checked":false,"disabled":true,"title":"Lucian Office isn't in lucianos/apps, so there's nothing to update."}
+110. toggleMessage(1, 24)
+   => "Self-updating is on: Lucian Office is checked every 24 hours."
+111. installList("#!/bin/sh\nset -e\nfor app in mnnaction\tmoviemr\ttabler\tpresenter; do\n  get \"apps/$app\" \"$app\"\ndone\necho \"Done.\"")
+   => {"apps":["mnnaction","moviemr","tabler","presenter"],"tools":[]}
+112. listsAgree({"apps":["lucianoffice","mnnaction"],"tools":["Starlog","vetusiapl2webpl","S2A2"]}, {"apps":["lucianoffice","mnnaction"],"tools":["Starlog","vetusiapl2webpl","S2A2"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+113. boxView({"office":0,"officeInstalled":false,"everyHours":1})
+   => {"checked":false,"disabled":true,"title":"Lucian Office isn't in lucianos/apps, so there's nothing to update."}
+114. toggleMessage(1, 24)
+   => "Self-updating is on: Lucian Office is checked every 24 hours."
+115. installList("#!/bin/sh\nset -e\nfor app in ; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/Starlog\" Starlog   # a tool\nget \"$TOOLS/mnns\" mnns\n  get \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl   # a tool")
+   => {"apps":[],"tools":["Starlog","mnns"]}
+116. listsAgree({"apps":["presenter","mnnaction"],"tools":["vetusiapl2webpl","S2A2","mnns"]}, {"apps":["presenter","mnnaction"],"tools":["vetusiapl2webpl","S2A2","mnns"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+117. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+118. toggleMessage(1, 1)
+   => "Self-updating is on: Lucian Office is checked every hour."
+119. installList("#!/bin/sh\nset -e\nget \"$TOOLS/Starlog\" Starlog   # a tool\nget \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl")
+   => {"apps":[],"tools":["Starlog","vetusiapl2webpl"]}
+120. listsAgree({}, {"apps":["etcher"],"tools":["S2A2","Starlog","mnns"]})
+   => {"ok":false,"missingApps":["etcher"],"extraApps":[],"missingTools":["S2A2","Starlog","mnns"],"extraTools":[]}
+121. boxView({})
+   => {"checked":false,"disabled":true,"title":"Lucian Office isn't in lucianos/apps, so there's nothing to update."}
+122. toggleMessage(0, 168)
+   => "Self-updating is off."
+123. installList("#!/bin/sh\nset -e\nfor app in   writer ; do\n  get \"apps/$app\" \"$app\"\ndone")
+   => {"apps":["writer"],"tools":[]}
+124. listsAgree({"apps":["writer","moviemr","counter"],"tools":["S2A2"]}, {"apps":["writer","moviemr","counter"],"tools":["S2A2"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+125. boxView({"office":1,"officeInstalled":true})
+   => {"checked":true,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+126. toggleMessage(false, 168)
+   => "Self-updating is off."
+127. installList("#!/bin/sh\nset -e\nfor app in   tabler  writer  lucianoffice  moviemr  etcher; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl\nget \"$TOOLS/S2A2\" S2A2   # a tool\necho \"Done.\"")
+   => {"apps":["tabler","writer","lucianoffice","moviemr","etcher"],"tools":["vetusiapl2webpl","S2A2"]}
+128. listsAgree({"apps":"writer"}, {"apps":["presenter"],"tools":["S2A2","vetusiapl2webpl"]})
+   => {"ok":false,"missingApps":["presenter"],"extraApps":[],"missingTools":["S2A2","vetusiapl2webpl"],"extraTools":[]}
+129. boxView({"failed":true})
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+130. toggleMessage(0, 168)
+   => "Self-updating is off."
+131. installList("#!/bin/sh\nset -e\nfor app in studio; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl\necho \"Done.\"")
+   => {"apps":["studio"],"tools":["vetusiapl2webpl"]}
+132. listsAgree({"apps":["writer","glinspire"],"tools":[]}, {"apps":["writer","glinspire"],"tools":[]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+133. boxView({"office":true,"officeInstalled":false,"everyHours":24})
+   => {"checked":true,"disabled":true,"title":"Lucian Office isn't in lucianos/apps, so there's nothing to update."}
+134. toggleMessage(false, 168)
+   => "Self-updating is off."
+135. installList("#!/bin/sh\nset -e\nfor app in   etcher; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/S2A2\" S2A2")
+   => {"apps":["etcher"],"tools":["S2A2"]}
+136. listsAgree({"apps":["lucianoffice","mnnaction","moviemr"],"tools":["vetusiapl2webpl"]}, {"apps":["mnnaction","moviemr"],"tools":["vetusiapl2webpl"]})
+   => {"ok":false,"missingApps":[],"extraApps":["lucianoffice"],"missingTools":[],"extraTools":[]}
+137. boxView({"office":0,"officeInstalled":true})
+   => {"checked":false,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+138. toggleMessage(0, 168)
+   => "Self-updating is off."
+139. installList("#!/bin/sh\nset -e\nfor app in   tabler lucianoffice mnnaction moviemr presenter ; do\n  get \"apps/$app\" \"$app\"\ndone\n  get \"$TOOLS/mnns\" mnns   # a tool")
+   => {"apps":["tabler","lucianoffice","mnnaction","moviemr","presenter"],"tools":[]}
+140. listsAgree(null, {"apps":["counter","moviemr"],"tools":["vetusiapl2webpl","mnns"]})
+   => {"ok":false,"missingApps":["counter","moviemr"],"extraApps":[],"missingTools":["vetusiapl2webpl","mnns"],"extraTools":[]}
+141. boxView({"failed":true})
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+142. toggleMessage(true, 168)
+   => "Self-updating is on: Lucian Office is checked every 168 hours."
+143. installList("#!/bin/sh\nset -e\nfor app in   studio ; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/S2A2\" S2A2   # a tool\nget \"$TOOLS/Starlog\" Starlog   # a tool\nget \"$TOOLS/mnns\" mnns")
+   => {"apps":["studio"],"tools":["S2A2","Starlog","mnns"]}
+144. listsAgree({"apps":["writer","studio","tabler"],"tools":["Starlog","vetusiapl2webpl"]}, {"apps":["studio","tabler"],"tools":["Starlog","vetusiapl2webpl"]})
+   => {"ok":false,"missingApps":[],"extraApps":["writer"],"missingTools":[],"extraTools":[]}
+145. boxView({})
+   => {"checked":false,"disabled":true,"title":"Lucian Office isn't in lucianos/apps, so there's nothing to update."}
+146. toggleMessage(false, 24)
+   => "Self-updating is off."
+147. installList("#!/bin/sh\nset -e\nfor app in mnnaction\ttabler\tmoviemr; do\n  get \"apps/$app\" \"$app\"\ndone\n  get \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl\nget \"$TOOLS/mnns\" mnns   # a tool\n  get \"$TOOLS/Starlog\" Starlog")
+   => {"apps":["mnnaction","tabler","moviemr"],"tools":["mnns"]}
+148. listsAgree({"apps":["counter","glinspire","presenter"],"tools":["S2A2"]}, {"apps":["counter","glinspire","presenter"],"tools":["S2A2"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+149. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+150. toggleMessage(1, 168)
+   => "Self-updating is on: Lucian Office is checked every 168 hours."
+151. installList("#!/bin/sh\nset -e\nfor app in   writer mnnaction; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl")
+   => {"apps":["writer","mnnaction"],"tools":["vetusiapl2webpl"]}
+152. listsAgree({"apps":[],"tools":["S2A2"]}, {"apps":[],"tools":["S2A2"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+153. boxView({})
+   => {"checked":false,"disabled":true,"title":"Lucian Office isn't in lucianos/apps, so there's nothing to update."}
+154. toggleMessage(0, 12)
+   => "Self-updating is off."
+155. installList("#!/bin/sh\nset -e\nfor app in   glinspire  tabler  mnnaction  writer; do\n  get \"apps/$app\" \"$app\"\ndone\n  get \"$TOOLS/mnns\" mnns")
+   => {"apps":["glinspire","tabler","mnnaction","writer"],"tools":[]}
+156. listsAgree({"apps":["moviemr","writer","studio"],"tools":["S2A2"]}, {"apps":["moviemr","writer","studio"],"tools":["S2A2"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+157. boxView({"office":true,"officeInstalled":0,"everyHours":6})
+   => {"checked":true,"disabled":true,"title":"Lucian Office isn't in lucianos/apps, so there's nothing to update."}
+158. toggleMessage(null, 1)
+   => "Self-updating is off."
+159. installList("#!/bin/sh\nset -e\nfor app in lucianoffice studio writer ; do\n  get \"apps/$app\" \"$app\"\ndone\necho \"Done.\"")
+   => {"apps":["lucianoffice","studio","writer"],"tools":[]}
+160. listsAgree({"apps":["moviemr","presenter"],"tools":["vetusiapl2webpl"]}, {"apps":["moviemr","presenter"],"tools":["vetusiapl2webpl"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+161. boxView({"office":true,"officeInstalled":true})
+   => {"checked":true,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+162. toggleMessage(1, 168)
+   => "Self-updating is on: Lucian Office is checked every 168 hours."
+163. installList("#!/bin/sh\nset -e\nfor app in presenter moviemr; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/Starlog\" Starlog\necho \"Done.\"")
+   => {"apps":["presenter","moviemr"],"tools":["Starlog"]}
+164. listsAgree({"apps":["presenter","etcher","lucianoffice"],"tools":[]}, {"apps":["presenter","etcher","lucianoffice"],"tools":["Starlog"]})
+   => {"ok":false,"missingApps":[],"extraApps":[],"missingTools":["Starlog"],"extraTools":[]}
+165. boxView({"office":1,"officeInstalled":true})
+   => {"checked":true,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+166. toggleMessage(true, 12)
+   => "Self-updating is on: Lucian Office is checked every 12 hours."
+167. installList("#!/bin/sh\nset -e\nget \"$TOOLS/S2A2\" S2A2   # a tool\nget \"$TOOLS/mnns\" mnns\nget \"$TOOLS/Starlog\" Starlog   # a tool")
+   => {"apps":[],"tools":["S2A2","mnns","Starlog"]}
+168. listsAgree({"apps":["studio"],"tools":[]}, {"apps":["studio","tabler"],"tools":[]})
+   => {"ok":false,"missingApps":["tabler"],"extraApps":[],"missingTools":[],"extraTools":[]}
+169. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+170. toggleMessage(null, 2)
+   => "Self-updating is off."
+171. installList("#!/bin/sh\nset -e\nfor app in glinspire\tcounter\tetcher\tmnnaction ; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/S2A2\" S2A2\nget \"$TOOLS/Starlog\" Starlog   # a tool")
+   => {"apps":["glinspire","counter","etcher","mnnaction"],"tools":["S2A2","Starlog"]}
+172. listsAgree({"apps":["studio"],"tools":["S2A2","vetusiapl2webpl"]}, {"apps":["studio"],"tools":["S2A2","vetusiapl2webpl"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+173. boxView({"office":0,"officeInstalled":true})
+   => {"checked":false,"disabled":false,"title":"Optional: LucianOS pulls Lucian Office's apps and tools from GitHub every few hours (fast-forward only; repos with your own changes are left alone)"}
+174. toggleMessage(false, 6)
+   => "Self-updating is off."
+175. installList("#!/bin/sh\nset -e\nfor app in tabler\tmoviemr; do\n  get \"apps/$app\" \"$app\"\ndone\n  get \"$TOOLS/mnns\" mnns   # a tool")
+   => {"apps":["tabler","moviemr"],"tools":[]}
+176. listsAgree({"apps":["studio","etcher","writer","mnnaction","glinspire"],"tools":["S2A2"]}, {"apps":["studio","writer","mnnaction","glinspire"],"tools":["S2A2"]})
+   => {"ok":false,"missingApps":[],"extraApps":["etcher"],"missingTools":[],"extraTools":[]}
+177. boxView({"failed":true})
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+178. toggleMessage(null, "6")
+   => "Self-updating is off."
+179. installList("#!/bin/sh\nset -e\nfor app in mnnaction\twriter\tlucianoffice\tpresenter; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/S2A2\" S2A2")
+   => {"apps":["mnnaction","writer","lucianoffice","presenter"],"tools":["S2A2"]}
+180. listsAgree(null, {"apps":["tabler","etcher","counter"],"tools":[]})
+   => {"ok":false,"missingApps":["tabler","etcher","counter"],"extraApps":[],"missingTools":[],"extraTools":[]}
+181. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+182. toggleMessage(true, 6)
+   => "Self-updating is on: Lucian Office is checked every 6 hours."
+183. installList("#!/bin/sh\nset -e\nfor app in   etcher  counter ; do\n  get \"apps/$app\" \"$app\"\ndone\n  get \"$TOOLS/S2A2\" S2A2   # a tool")
+   => {"apps":["etcher","counter"],"tools":[]}
+184. listsAgree(null, {"apps":["tabler","studio","mnnaction"],"tools":["vetusiapl2webpl","Starlog"]})
+   => {"ok":false,"missingApps":["tabler","studio","mnnaction"],"extraApps":[],"missingTools":["vetusiapl2webpl","Starlog"],"extraTools":[]}
+185. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+186. toggleMessage(0, "6")
+   => "Self-updating is off."
+187. installList("#!/bin/sh\nset -e\nfor app in moviemr\tmnnaction\tglinspire\tetcher\ttabler ; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/Starlog\" Starlog   # a tool")
+   => {"apps":["moviemr","mnnaction","glinspire","etcher","tabler"],"tools":["Starlog"]}
+188. listsAgree({"apps":["studio","tabler","lucianoffice","writer"],"tools":["S2A2","S2A2","vetusiapl2webpl"]}, {"apps":["writer","tabler","studio"],"tools":["vetusiapl2webpl","S2A2"]})
+   => {"ok":false,"missingApps":[],"extraApps":["lucianoffice"],"missingTools":[],"extraTools":[]}
+189. boxView(null)
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+190. toggleMessage(null, 6)
+   => "Self-updating is off."
+191. installList("#!/bin/sh\nset -e\nfor app in   counter  mnnaction ; do\n  get \"apps/$app\" \"$app\"\ndone\nget \"$TOOLS/Starlog\" Starlog   # a tool\nget \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl   # a tool")
+   => {"apps":["counter","mnnaction"],"tools":["Starlog","vetusiapl2webpl"]}
+192. listsAgree({"apps":[],"tools":["vetusiapl2webpl"]}, {"apps":[],"tools":["vetusiapl2webpl"]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}
+193. boxView({})
+   => {"checked":false,"disabled":true,"title":"Lucian Office isn't in lucianos/apps, so there's nothing to update."}
+194. toggleMessage(0, 1)
+   => "Self-updating is off."
+195. installList("#!/bin/sh\nset -e\nget \"$TOOLS/Starlog\" Starlog")
+   => {"apps":[],"tools":["Starlog"]}
+196. listsAgree({"apps":["lucianoffice","counter"],"tools":["S2A2","S2A2"]}, {"apps":["lucianoffice","counter"],"tools":["Starlog","S2A2"]})
+   => {"ok":false,"missingApps":[],"extraApps":[],"missingTools":["Starlog"],"extraTools":[]}
+197. boxView({"failed":true})
+   => {"checked":false,"disabled":true,"title":"Update LucianOS first (git pull in your lucianos folder, then restart it) to use self-updating."}
+198. toggleMessage(1, 1)
+   => "Self-updating is on: Lucian Office is checked every hour."
+199. installList("#!/bin/sh\nset -e\nfor app in glinspire ; do\n  get \"apps/$app\" \"$app\"\ndone\n# get \"$TOOLS/vetusiapl2webpl\" vetusiapl2webpl   # a tool")
+   => {"apps":["glinspire"],"tools":[]}
+200. listsAgree({"apps":["etcher"],"tools":[]}, {"apps":["etcher"],"tools":[]})
+   => {"ok":true,"missingApps":[],"extraApps":[],"missingTools":[],"extraTools":[]}

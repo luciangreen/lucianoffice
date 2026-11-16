@@ -8,7 +8,8 @@
     "test": "node --test test/*.test.js",
     "check-prolog": "node scripts/check-prolog.mjs",
     "check-coach": "node scripts/check-coach.mjs",
-    "ios": "node io/make-ios.mjs"
+    "ios": "node io/make-ios.mjs",
+    "proofs": "swipl -g main -t halt proofs/self_update.pl && swipl -g check -t halt proofs/self_update_ios.pl"
   },
   "license": "BSD-3-Clause"
 }
